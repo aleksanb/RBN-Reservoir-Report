@@ -1,18 +1,24 @@
-file = report.tex
-bibfile = report.aux
+file = forprosjekt-report.tex
+bibfile = forprosjekt-report.aux
+pdffile = $(file:.tex=.pdf)
 
 .PHONY: all
-all:
+all: build upload
+
+.PHONY: build
+build:
 	pdflatex $(file)
 	bibtex $(bibfile)
 	pdflatex $(file)
 	pdflatex $(file)
 
+.PHONY: upload
+upload:
+	bash -i -c "upload $(pdffile)"
 
 .PHONY: open
 open:
-	evince $(file:.tex=.pdf)
-
+	evince $(pdffile)
 
 .PHONY: clean
 clean:

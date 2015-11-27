@@ -1,0 +1,101 @@
+\section{Introduction}
+
+\subsection{Why this?}
+
+\subsection{Reservoir computing}
+
+\subsubsection{Liquid state machines and echo state networks}
+
+\subsection{Random boolean networks}
+
+\section{Stuff about complexity?}
+
+\subsection{How complex must things be, edge of chaos?}
+
+\subsection{Complexity of RBNs, how to measure}
+
+\subsection{Complexity about Reservoir computing thingies?}
+
+\section{Results or something?}
+
+\subsection{Show working case of reservoir computing with normal Echo State or something}
+
+\subsection{Put in Random boolean network?}
+
+\subsection{Show how 'complex' the boolean network is? Show that it also can do computations.}
+
+\section{Correspondence between complexity of RBN and computations achieved?}
+
+\section{Discussion}
+
+\section{Complexity measures for rbn}
+Wow such success, you revolutionized the field, Aleksander!
+
+Well fuck\cite{reservoir-rbn}.
+
+Hvilken kodebase? Matlab rbn toolbox! \url{http://www.teuscher.ch/rbntoolbox/UsingToolbox/main\_toolbox.htm}
+
+In RC, we continuously
+perturb the reservoir and so the underlying RBN of our
+model  is  not  a  closed  system.   Therefore,  computation
+cannot be dependent on attractors and must be enabled
+by the dynamics of the RBN. However, in some circum-
+stances the network dynamics can fall into an attractor
+temporarily or indefinitely, due to frozen dynamics, inad-
+equate distribution of the input signal, or a non-random input  stream.   Therefore,  RC  is  a  novel  framework  in
+which to explore the capacity of RBN dynamics for infor-
+mation processing.
+
+\section{Energy efficiency}
+Mere ting fra 2014 \cite{reservoir-rbn-energy-efficiency}.
+\begin{itemize}
+  \item Interessante seksjoner: 1.2.4 Measures for RC-RBNs
+\end{itemize}
+
+
+To reiterate, there
+has not been much research in the study of RC devices using reservoirs with
+heterogenous
+in-degrees,  as  most  work  is  concerned  with  the  training  of  RNNs  (normally  homogenous)
+reservoirs.   The  study  of  heterogenous  reservoirs  may  give  insight  into  methods  of  using
+generally undesirable physical phenomena in a computationally useful way.
+
+
+The major nding of the SGT study showed that the computational capability of RBNs
+was maximized for networks with critical dynamics.  The results were not obtained analyti-
+cally, but reinforced previous analytic claims through the use of simulation.  The simulator
+used to generate their results was likely a tool called
+RBN Toolbox
+created in part by Christof
+Teuscher [8]
+
+
+Although the issue is not
+addressed in our work, research should be conducted in the development of new measures
+which do not support these 
+aws.  In our research though,  the chosen measures,  specically
+computational capability, work well in representing the dynamics of many generated networks
+as the averaged measure becomes more accurate as the sample count increases.
+
+The choice to set L equal to N comes from previous
+research in [4], where computational capability is shown to be higher for values of
+L closer to N (the network is being perturbed more).
+(Red.amn. L er antall koblinger fra input til RBN)
+
+\section{Training}
+Woop de har faen meg trent de også!!!
+\cite{how-to-train-your-rbn}
+
+L = N * 0.20
+
+We conclude that RBNs can be successfully setup in solving goal-driven prob-
+lems  by  interactively  training  its  read-out  layer  through  reinforcement  learning
+approach.  They are particularly echocient in solving POMDPs due to the dynamics
+achieved by the recurrent connections in such networks.  Though the RBN-based
+agents  performed  comparable  to  other  benchmark  techniques  such  as  evolution-
+ary approaches talked about in related literatures, we see that they were able to
+successfully adapt to their set environments in an interactive manner.
+In future work, we would like to extend our framework to memristor based hard-
+ware implementations of reservoirs.  We aspire to setup memristor based reservoirs
+augmented with read-out layers in reinforcement learning contexts and train them
+interactively to function as autonomous agents.
