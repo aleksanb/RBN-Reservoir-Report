@@ -1,15 +1,26 @@
 \section{Future work}
 
-Drodle om hva jeg vil gjøre til våren.
+\subsection{How complex do the reservoirs actually have to be?}
+
+Can they be really small, and still adequately do the task?
+The time was not there to research this for this preliminary project.
+
+\subsection{Using generative genomes}
+
+Fixed-representation genomes of graphs are hella space-inefficient.
+A generative genome would instead represent the growing of the graph,
+but would be able to 'hit' fewer targets in adult state-space.
+Therefore, the finding that there are multiple acceptable RBN-Reservoirs per readout layer
+comforts us that a generative genome could also be efficient.
+
+\subsection{Scaling up simulation}
+
+RBN-simulation in python is hella slow.
+FPGA / supercomputers instead?
 
 \section{Conclusion}
 
-It has also been suggested 29 that LSMs might present a useful framework
-for modeling computations in gene regulation networks. These networks
-also compute on time varying inputs (e.g., external signals) and
-produce a multitude of time varying output signals (transcription rates of
-genes). Furthermore these networks are composed of a very large number
-of diverse subprocesses (transcription of transcription factors) that tend to
-have each a somewhat different temporal dynamics 30
+Turns out you can evolve RBN-Reservoirs to use similar readout layers!
+Yay, this is cool as that indicates that there might be exploitable properties of material that can be used to figure out if something is good for computation, before having to use it for computations!
 
-Kanskje det ja?
+More stuff here later i guess

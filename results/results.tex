@@ -1,10 +1,42 @@
 \section{Results}
 
-3: Faktisk kjøring av eksperimenter, kompleksitet opp mot faktisk ytelse osv.
-Dynamikk: Er dynamikken ca like bra?
-2 utfall: Sammenheng mellom resultat og dynamikk i reservoaret.
---------: Over HODET ingen sammenheng.
+\subsection{Using RBN-reservoirs in solving time-series tasks}
 
-Spesifikke dynamikkrav til spesifikke klasser av problemer?
-Redusere stemme mengden med dynamikk.
-veldig enkelt problem -> Veldig enkelt reservoar?
+Turns out it works great, as in that 2013 paper.
+There seems to be extremely many usable reservoirs, at least for K=2.
+
+\begin{itemize}
+  \item Solving the Temporal-Parity task
+  \item Solving the Temporal-Density task
+\end{itemize}
+
+\subsection{Evolving new RBN-Reservoirs to use existing readout layers}
+
+For some readout layers (4 or so), check if there are multiple acceptable reservoirs for each readout layer.
+
+\begin{itemize}
+  \item Show Fitness Graphs with increasing fitness for evolved RBNs
+  \item Complexity analysis of RBNs utilizing the same readout layer
+\end{itemize}
+
+We see that there are many acceptable RBN-Reservoirs for each readout-layer.
+Maybe these RBN-Reservoirs have similar dynamics?
+
+
+\subsection{Analysis of Dynamics of developed RBN-Reservoirs}
+
+For each group of evolved RBN-Reservoirs (5 or so in each):
+
+\begin{itemize}
+  \item Show Computational complexity measure as developed in that 2013 paper
+  \item Show transient time for the group
+  \item Show Attractor lengths for the group
+\end{itemize}
+
+
+Perhaps the required dynamics are different for the different tasks?
+Remember=3 gives different attractors than remember=4. That'd be cool.
+
+
+Here there'll be an image visualizing one of the groups of evolved RBN-Reservoirs.
+Perhaps we can visually identify similarities.

@@ -1,11 +1,73 @@
 \section{Method}
 
-hva trengs for å kjøre eksperimentet, metode, oppsett, parameter, hvordan måle.
-Hva har jeg lagt vekt på? Alt har jo svakheter, vet om de men burde ikke ha noe å si.
-Kjøre store nok datasett, passe på at man ikke havner i en dal der alt suger elns.
-Alt avhengig av initial state.
+\subsection{Creation of RBN-Reservoirs, the perturbing thereof}
+
+RBNs are initialized randomly, and connected to a Ridge regression readout layer \cite{WhatIsRidgeRegression?}.
+They are then trained on the tasks from the next subsection.
+
+In literature, one frequently 'perturbs' or 'annoys' RBNs to see how change spreads through the network. \cite{CitationMissing}
+RBNs usually don't take input, but we can extend this Perturbation model to make the RBN handle input as follows:
+
+\begin{itemize}
+  \item Initialize RBN, set state to all 0's
+  \item LoopStart: Set input-connected nodes to input value
+  \item Run RBN as CRBN for 1 time-step, logging the RBN state
+  \item If input left, goto loopstart, else give all RBN states to next node in flow
+\end{itemize}
+
+The Ridge-Regression layer then receives all the intermediate states, as well as what each of the states should be classified as, and attempts to do regression on this dataset.
+
+If the RBN-Reservoir has 'good' dynamics,
+the readout layer will be able to correctly classify the input stream.
+Such reservoir / readout layers are then stored, or 'pickled' to disk for later analysis and re-use.
+
+\subsection{Tasks}
+
+Here are the datasets used in this report, originally proposed in \cite{rbn-reservoir}.
+
+\begin{itemize}
+  \item Temporal Parity
+  \item Temporal Density
+\end{itemize}
+
+Here there'll be a somewhat compact explanation of the tasks and required reservoir complexity,
+as measured in that previous papaer.
+
+\subsection{Evolving RBN-Reservoirs}
+
+\begin{itemize}
+  \item Here we present how a Genetic Algorithm works
+  \item Here we present the Genome used in the task
+  \item Here we present the fitness function used
+\end{itemize}
+
+Note that we allow variable-input connections, even though the readout-layer was trained on a RBN with fixed number of input-connections.
+
+\subsection{Measuring dynamics}
+
+\begin{itemize}
+  \item
+    How do i estimate computational power?
+    Use the complexity measure from \cite{rbn-reservoir} of course!
+  \item
+    How do i estimate transient times and attractor lengths?
+    Random samling! Link to some algorithm i use here
+  \item
+    Fun Anecdote: Link to that paper measuring power usage in RBN-Reservoirs:
+    \cite{rbn-reservoir-energy-efficiency}
+\end{itemize}
+
+\subsection{Weaknesses}
+
+\begin{itemize}
+  \item Extremely large state-space
+  \item Can be difficult to generalize results
+  \item
+    Genome representation, inefficient, better with binary string?
+    Luckily dominated by RBN-Reservoir simulation time
+\end{itemize}
+
 
 \subsection{Experimental setup}
 
-Experimental setup: Funker med ESN, hvis va jeg måler, plot grafen.
-Vis så med RBN. Slik måler jeg, slik ser det ut, osv osv.
+Should i show the RBN-Reservoir performance in solving time-series tasks here instead of as the first section of results?
