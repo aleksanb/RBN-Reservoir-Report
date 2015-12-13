@@ -56,14 +56,15 @@ The former is visualized in figure \ref{figure:temporal-parity}.
   \label{figure:temporal-parity}
 \end{figure}
 
+\subsection{Find some other place for this?}
+
 It seems that for a random sample of reservoirs of a given size and connetivity,
 the temporal density task is solveable for a larger $ n $ than the temporal parity one.
 The parity task might therefore requires a more specialized network topology to function well.
 Due to the seemingly increased complexity of separating the temporal parity task at low $ n $,
 it was chosen as the main task in this paper.
 
-\todo{Here there'll be a somewhat compact explanation of the tasks and required reservoir complexity,
-as measured in that previous papaer.}
+\todo{Talk a bit about required reservoir complexity, as measured in that previous papaer here?}
 
 \subsection{Evolving RBN-Reservoirs}
 
@@ -102,6 +103,18 @@ Note that we allow variable-input connections, even though the readout-layer was
 
 \subsection{Experimental setup}
 
+To verify that RBN simulation is working as expected,
+a RBN is created randomly, initial state set to all zeros, and ran.
+The results are visualized in figure \ref{figure:rbn-noperturb}.
+We see that the RBN exhibits stable dynamics, and enters into an attractor around $t=15$.
+In figure \ref{figure:rbn-perturb} we continiously perturb the RBN with the input stream from the Temporal Parity task visualized in \ref{figure:temporal-parity}.
+In the perturbed case, the state trajectory is continiously changed, preventing the RBN from settling into an attractor.
+Interestingly enough, there seems to be a visual similarity between the two cases.
+
+This erratic pattern of state transitions is then fed into the readout layer,
+which is then tasked with finding a linear combination of the RBN states that results in the expected output for the given task.
+
+
 \begin{figure}
   \centering
 
@@ -118,7 +131,7 @@ Note that we allow variable-input connections, even though the readout-layer was
     }
   }
 
-  \caption{The same RBN both perturbed and unperturbed. In the perturbed case, the state trajectory is continiously changed. N=100, K=2, P=0.5, L=50, Initial state=0}
+  \caption{The same RBN both perturbed and unperturbed. N=100, K=2, P=0.5, L=50, Initial state=0}
 \end{figure}
 
 Should i show the RBN-Reservoir performance in solving time-series tasks here instead of as the first section of results?
