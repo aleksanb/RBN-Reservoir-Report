@@ -23,15 +23,47 @@ Such reservoir / readout layers are then stored, or 'pickled' to disk for later 
 
 \subsection{Tasks}
 
-Here are the datasets used in this report, originally proposed in \cite{rbn-reservoir}.
+To measure RBN reservoir performance, a classification task is required.
+To simplify IO transformations from and to the reservoir system,
+a binary classification task, consisting of binary input data,
+where the reservoir consumes one bit at a time, is chosen.
 
-\begin{itemize}
-  \item Temporal Parity
-  \item Temporal Density
-\end{itemize}
+Two such tasks were introduced in \cite{rbn-reservoir}: Temporal Density and Temporal Parity.
+Both require the reservoir to be able to retain information for a sliding window of size $ n $,
+offset by some value $ t $, back through the input stream.
+The temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
+the temporal density task to determine whether there were a majority of ones.
+The former is visualized in figure \ref{figure:temporal-parity}.
 
-Here there'll be a somewhat compact explanation of the tasks and required reservoir complexity,
-as measured in that previous papaer.
+\begin{figure}
+  \subfloat[Input]{
+    \resizebox{\columnwidth}{!}{
+      \includegraphics{method/temporal_parity-10-200-3-input.pdf}
+    }
+  }
+
+  \subfloat[Correct output]{
+    \resizebox{\columnwidth}{!}{
+      \includegraphics{method/temporal_parity-10-200-3-output.pdf}
+    }
+  }
+
+  \caption{
+    The first 30 elements of a Temporal Parity task with $[n=3, t=0]$.
+    A one is visualized as white, while a zero is black.
+    We see that correct output at time $i$ is equal to there being an odd number of $1$s in inputs $[i, i-1, i-2]$
+  }
+  \label{figure:temporal-parity}
+\end{figure}
+
+It seems that for a random sample of reservoirs of a given size and connetivity,
+the temporal density task is solveable for a larger $ n $ than the temporal parity one.
+The parity task might therefore requires a more specialized network topology to function well.
+Due to the seemingly increased complexity of separating the temporal parity task at low $ n $,
+it was chosen as the main task in this paper.
+
+\todo{Here there'll be a somewhat compact explanation of the tasks and required reservoir complexity,
+as measured in that previous papaer.}
 
 \subsection{Evolving RBN-Reservoirs}
 
