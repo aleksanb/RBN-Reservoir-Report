@@ -70,4 +70,23 @@ Note that we allow variable-input connections, even though the readout-layer was
 
 \subsection{Experimental setup}
 
+\begin{figure}
+  \centering
+
+  \subfloat[Unperturbed]{
+    \resizebox{0.5\columnwidth}{!}{
+      \includegraphics{method/final-1-noperturb.pdf}
+      \label{figure:rbn-noperturb}
+    }
+  }
+  \subfloat[Perturbed]{
+    \resizebox{0.5\columnwidth}{!}{
+      \includegraphics{method/final-1-perturb.pdf}
+      \label{figure:rbn-perturb}
+    }
+  }
+
+  \caption{The same RBN both perturbed and unperturbed. In the perturbed case, the state trajectory is continiously changed. N=100, K=2, P=0.5, L=50, Initial state=0}
+\end{figure}
+
 Should i show the RBN-Reservoir performance in solving time-series tasks here instead of as the first section of results?
