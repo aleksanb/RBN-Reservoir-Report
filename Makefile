@@ -3,7 +3,11 @@ bibfile = forprosjekt-report.aux
 pdffile = $(file:.tex=.pdf)
 
 .PHONY: all
-all: build upload
+all: build
+
+.PHONY: guard
+guard: open
+	bundle exec guard
 
 .PHONY: build
 build:
@@ -18,7 +22,7 @@ upload:
 
 .PHONY: open
 open:
-	evince $(pdffile)
+	evince $(pdffile) &
 
 .PHONY: clean
 clean:
