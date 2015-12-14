@@ -6,7 +6,7 @@ pdffile = $(file:.tex=.pdf)
 all: build
 
 .PHONY: guard
-guard: open
+guard:
 	bundle exec guard
 
 .PHONY: build

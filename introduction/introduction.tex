@@ -1,5 +1,30 @@
 \section{Introduction}
 
+Reservoir computing (RC) is a form of machine learning that sprung out from the study of recurrent neural networks (RNNs).
+It attepts to utilize the temporal dynamics of some fixed complex system, dubbed a 'reservoir',
+to preprocess some temporal problem making it separable with a simple linear readout layer.
+
+RNNs, as opposed to feed-forward neural networks,
+are notoriously difficult and time-consuming to train.
+This due to feedback from the recurrent connections during the training process\cm{RNN training issues}.
+It was therefore proposed in both \cm{original esn paper} and \cm{original-lsm-paper}
+to separate the RNN into two parts, the untrained 'reservoir' part, and the trained 'readout layer'.
+
+It turns out that after imposing certain constrainst on this 'reservoir',
+one can efficiently solve many spacial-temporal tasks such as handwriting recognition \cm{handwriting-reservoir}.
+
+The next question then becomes, are there other types of complex systems can be used as reservoirs
+and what properties must these reservoirs share to efficiently solve probelms?
+Complex networks similar to recurrent neural nets include cellular automata (CAs) and random boolean networks (RBNs), the latter also known as kaufmann or n-k-networks \cm{kaufmann-networks}.
+Both are considerably less complex than RNNs, as state transitions can be computed with the help of simple lookup tables, as opposed to the multiplication required in echo-state networks.
+
+Some of these aproaches have allready been successallready been successfully attempted.
+In \cite{reservoir-rbn}, the authors combine the reservoir computing approach with random boolean networks, creating a functioning RBN-Reservoir system.
+In \cm{water-bucket-paper} the authors successfully implement a RC system using a literal reservoir of water as their reservoir.
+
+
+\todo[inline]{Snakk om sparsely connected networks, recurrent networks, training difficulty, dynamikk (noe som feedforward neuralnett ikke har), utnytte denne dynamikken, RNN, RBN, CA som alle instanser av komplekse systemer, komplekse nettverk?}
+
 Reservoir computing is a category of machine learning closely related to recurent neural nets (RRN).
 As it can be quite difficult to train RRNs, some people \cite{liquidstatepaper} \cite{echostatenetworkpaper} tried only training the last layer of the RNN,
 letting the first n-1 layers of the RNN act as a 'reservoir' of dynamics which then could be exited by external input.
@@ -14,21 +39,6 @@ we should be able to use this new network as the 'reservoir' with a simple reado
 If this area of research remains fruitful, it can be used to develop metrics for what other 'reservoirs' or materials might be useful as a  computational base.
 This can be useful for evolution in materio, for selecting substrates \cite{evolutionInMaterio}
 
-
-\subsection{A brief introduction to Random boolean networks}
-
-\subsection{RBN-based reservoirs}
-
-Can we use these simple networks for computation?
-Turns out Yes!, as shown in this paper \cite{rbn-reservoir}, and it works reasonably well.
-
-Takeaways from the paper:
-\begin{itemize}
-  \item Relationship between dynamical properties and computational power
-  \item Required connections to input layer, how much perturbation required?
-\end{itemize}
-
-Advantages include being MUCH less complex than Echo-state networks and similar, as those require operations such as 'multiplication' which is orders more complex than the simple lookup-table transitions for the RBN nodes.
 
 \subsection{Dynamics and complexity of reservoirs}
 

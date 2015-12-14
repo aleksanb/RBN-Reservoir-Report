@@ -1,5 +1,7 @@
 \section{Method}
 
+\todo[inline]{Explain why measurements, and how measurements.}
+
 \subsection{Creation of RBN-Reservoirs, the perturbing thereof}
 
 RBNs are initialized randomly, and connected to a Ridge regression readout layer \cite{WhatIsRidgeRegression?}.
@@ -60,9 +62,23 @@ The parity task might therefore requires a more specialized network topology to 
 Due to the seemingly increased complexity of separating the temporal parity task at low $ n $,
 it was chosen as the main task in this paper.
 
-%\todo{Talk a bit about required reservoir complexity, as measured in that previous papaer here?}
+\todo[inline]{Talk a bit about required reservoir complexity, as measured in that previous papaer here?}
 
 \subsection{Evolving RBN-Reservoirs}
+
+\begin{figure}
+    \centering
+    %\begin{bytefield}{18} \\ \end{bytefield} % hack to unbreak next bytefield
+    \begin{bytefield}{4}
+        \bitheader{0-4} \\
+        \bitbox{1}{Input connection} &
+        \bitbox{1}{Neighbor ID} &
+        \bitbox{1}{Neighbor ID} &
+        \bitbox{1}{Transition Rule} \\
+    \end{bytefield}
+    \caption{The genotype mapping for this experiment. S is the static amplitude of a logical low input signal, and C is the center threshold offset.}
+\end{figure}
+
 
 \begin{itemize}
   \item Here we present how a Genetic Algorithm works
@@ -128,5 +144,3 @@ which is then tasked with finding a linear combination of the RBN states that re
     N=100, K=2, P=0.5, L=50, Initial state=0
   }
 \end{figure}
-
-Should i show the RBN-Reservoir performance in solving time-series tasks here instead of as the first section of results?
