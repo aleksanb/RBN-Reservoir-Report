@@ -7,7 +7,7 @@ to preprocess some temporal problem making it separable with a simple linear rea
 RNNs, as opposed to feed-forward neural networks,
 are notoriously difficult and time-consuming to train.
 This due to feedback from the recurrent connections during the training process\cm{RNN training issues}.
-It was therefore proposed in both \cm{original esn paper} and \cm{original-lsm-paper}
+It was therefore proposed in both \cite{jaeger2002adaptive} and \cm{original-lsm-paper}
 to separate the RNN into two parts, the untrained 'reservoir' part, and the trained 'readout layer'.
 
 It turns out that after imposing certain constrainst on this 'reservoir',
@@ -20,8 +20,10 @@ Both are considerably less complex than RNNs, as state transitions can be comput
 
 Some of these aproaches have allready been successallready been successfully attempted.
 In \cite{reservoir-rbn}, the authors combine the reservoir computing approach with random boolean networks, creating a functioning RBN-Reservoir system.
-In \cm{water-bucket-paper} the authors successfully implement a RC system using a literal reservoir of water as their reservoir.
+In \cite{fernando2003pattern} the authors successfully implement a RC system using an actual bucket of water as their reservoir.
 
+
+\todo[inline]{Snakk om paperet til Sipper, vanskeligheten å programmere ting \cite{sipper1999emergence}}
 
 \todo[inline]{Snakk om sparsely connected networks, recurrent networks, training difficulty, dynamikk (noe som feedforward neuralnett ikke har), utnytte denne dynamikken, RNN, RBN, CA som alle instanser av komplekse systemer, komplekse nettverk?}
 
