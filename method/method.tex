@@ -37,15 +37,11 @@ The former is visualized in figure \ref{figure:temporal-parity}.
 
 \begin{figure}
   \subfloat[Input]{
-    \resizebox{\columnwidth}{!}{
-      \includegraphics{method/temporal_parity-10-200-3-input.pdf}
-    }
+    \includegraphics[width=\columnwidth]{method/temporal_parity-10-200-3-input.pdf}
   }
 
   \subfloat[Correct output]{
-    \resizebox{\columnwidth}{!}{
-      \includegraphics{method/temporal_parity-10-200-3-output.pdf}
-    }
+    \includegraphics[width=\columnwidth]{method/temporal_parity-10-200-3-output.pdf}
   }
 
   \caption{
@@ -64,7 +60,7 @@ The parity task might therefore requires a more specialized network topology to 
 Due to the seemingly increased complexity of separating the temporal parity task at low $ n $,
 it was chosen as the main task in this paper.
 
-\todo{Talk a bit about required reservoir complexity, as measured in that previous papaer here?}
+%\todo{Talk a bit about required reservoir complexity, as measured in that previous papaer here?}
 
 \subsection{Evolving RBN-Reservoirs}
 
@@ -114,23 +110,15 @@ Interestingly enough, there seems to be a visual similarity between the two case
 This erratic pattern of state transitions is then fed into the readout layer,
 which is then tasked with finding a linear combination of the RBN states that results in the expected output for the given task.
 
-
 \begin{figure}
-  \centering
-
   \subfloat[Unperturbed]{
-    \resizebox{0.5\columnwidth}{!}{
-      \includegraphics{method/final-1-noperturb.pdf}
-      \label{figure:rbn-noperturb}
-    }
+    \includegraphics[width=0.5\columnwidth]{method/final-1-noperturb.pdf}
+    \label{figure:rbn-noperturb}
   }
   \subfloat[Perturbed]{
-    \resizebox{0.5\columnwidth}{!}{
-      \includegraphics{method/final-1-perturb.pdf}
-      \label{figure:rbn-perturb}
-    }
+    \includegraphics[width=0.5\columnwidth]{method/final-1-perturb.pdf}
+    \label{figure:rbn-perturb}
   }
-
   \caption{The same RBN both perturbed and unperturbed. N=100, K=2, P=0.5, L=50, Initial state=0}
 \end{figure}
 
