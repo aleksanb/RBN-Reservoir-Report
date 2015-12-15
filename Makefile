@@ -10,7 +10,7 @@ guard:
 	bundle exec guard
 
 .PHONY: build
-build:
+build: clean
 	pdflatex $(file)
 	bibtex $(bibfile)
 	pdflatex $(file)
