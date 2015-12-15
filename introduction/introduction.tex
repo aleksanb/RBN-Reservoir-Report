@@ -1,52 +1,76 @@
 \section{Introduction}
 
 Reservoir computing (RC) is a form of machine learning that sprung out from the study of recurrent neural networks (RNNs).
-It attepts to utilize the temporal dynamics of some fixed complex system, dubbed a 'reservoir',
-to preprocess some temporal problem making it separable with a simple linear readout layer.
+In short, it utilizes the dynamics of some complex system dubbed a 'reservoir' to preprocess a timeseries problem,
+transforming it from a temporal to a spacial one in the reservoir, making it then separable with a usually simple readout layer.
 
-RNNs, as opposed to feed-forward neural networks,
-are notoriously difficult and time-consuming to train.
-This due to feedback from the recurrent connections during the training process\cm{RNN training issues}.
-It was therefore proposed in both \cite{jaeger2002adaptive} and \cm{original-lsm-paper}
-to separate the RNN into two parts, the untrained 'reservoir' part, and the trained 'readout layer'.
+In this paper we investigate the dynamics of Reservoir Computing systems where the reservoir is a Random Boolean Network (RBN) \cite{gershenson2004introduction},
+an approach found fruitful in \cite{rbn-reservoir}.
 
-It turns out that after imposing certain constrainst on this 'reservoir',
-one can efficiently solve many spacial-temporal tasks such as handwriting recognition \cm{handwriting-reservoir}.
+First we reproduce chosen experiments from \cite{rbn-reservoir}, creating a working RBN-reservoir computing system (RRC).
 
-The next question then becomes, are there other types of complex systems can be used as reservoirs
-and what properties must these reservoirs share to efficiently solve probelms?
-Complex networks similar to recurrent neural nets include cellular automata (CAs) and random boolean networks (RBNs), the latter also known as kaufmann or n-k-networks \cm{kaufmann-networks}.
-Both are considerably less complex than RNNs, as state transitions can be computed with the help of simple lookup tables, as opposed to the multiplication required in echo-state networks.
+Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was trained on,
+and still stay accurate on the original classification task.
+These functionally equivalent reservoirs will be found through the use of an evolutionary algorithm.
 
-Some of these aproaches have allready been successallready been successfully attempted.
-In \cite{reservoir-rbn}, the authors combine the reservoir computing approach with random boolean networks, creating a functioning RBN-Reservoir system.
-In \cite{fernando2003pattern} the authors successfully implement a RC system using an actual bucket of water as their reservoir.
+Last we look at the dynamics and characteristics of these groups of RBN-Reservoirs, attempting to find any similarities that might be exploitable.
 
+\subsection{A brief introduction to reservoir computing}
 
-\todo[inline]{Snakk om paperet til Sipper, vanskeligheten å programmere ting \cite{sipper1999emergence}}
+Recurrent neural networks, as opposed to feed-forward neural networks,
+are notoriously time consuming and difficult to train.
+This due to feedback from the recurrent connections during the training process,
+allowing small topology changes to drastically change ones position in the fitness landscape.
 
-\todo[inline]{Snakk om sparsely connected networks, recurrent networks, training difficulty, dynamikk (noe som feedforward neuralnett ikke har), utnytte denne dynamikken, RNN, RBN, CA som alle instanser av komplekse systemer, komplekse nettverk?}
+It was therefore proposed both in \cite{jaeger2002adaptive} (as echo state networks, or ESN)
+and \cite{natschlager2002liquid} (as liquid state machines, or LSM) to separate the RNN into two parts,
+the untrained reccurrent reservoir, and the trained readout layer.
+Both of these methods have been unified into the field of Reservoir Computing,
+now focusing on the separate training and evolution of the recurrent and readout part \cite{lukovsevivcius2012reservoir}.
 
-Reservoir computing is a category of machine learning closely related to recurent neural nets (RRN).
-As it can be quite difficult to train RRNs, some people \cite{liquidstatepaper} \cite{echostatenetworkpaper} tried only training the last layer of the RNN,
-letting the first n-1 layers of the RNN act as a 'reservoir' of dynamics which then could be exited by external input.
+Useful RC resources include Organic \cite{organic}, an online RC hub,
+providing documentation, references, and a RC toolbox implemented in python.
+It has been quite useful for this project.
+Exiting applications of reservoir computing include speech and handwriting recognition,
+as well as controlling robotics, as detailed in \cite{lukovsevivcius2012reservoir}.
 
-Turns out this works, given some constraints on the 'reservoir'.
-Elaborate about these constrains, spectral radius < 1 for ESN.
+\subsection{Alternatives to classical reservoirs}
+
+An interesting question arises:
+Are there other types of complex systems that can be used as reservoirs?
+What properties must these reservoirs have to be able to solve problems?
+
+Complex networks similar to the sparsely connected RNNs found in classical RC devices include Cellular Automata and Random Boolean Networks.
+Both are considerably less complex than RNNs, requiring only simple lookup tables for state transitions as opposed to multiplication for RNNs.
+A short treatise on Cellular Computing \& friends is available here \cite{sipper1999emergence}.
+Cellular computing provides a potentially powerful alternative to classical computers,
+leveraging extreme parallelism, simple components and local state.
+
+The ever-so-cited 'Water bucket' paper investigated the use of an actual bucket of water as a reservoir \cite{fernando2003pattern},
+successfully recognizing patterns and achieving decent performance at that.
+The RBN-reservoir approach, as mentioned earlier, has also found some success.
+
+\subsection{Dynamics and complexity of reservoirs}
+
+In general, one wishes to use a reservoir with a complexity matching that of the problem.
+Utilizing a modern processor to predict a very simple timeseries would be a classic case of shooting sparrows with cannons \cite{wiki:sparrow},
+while achieving the same using a RBN or CA might be more impressive.
+
+\todo[inline]{Gotta finish introduction from hereon and down}
+
+So we have all this litterature on complex systems (CITATIONS HERE) that show that optimal computing power is most often found on the 'edge of chaos', or the critical state, on the edge between periodic and chaotic dynamics.
+In addition we have a measure for computational power in RRN's developed in \cite{rbn-reservoir} that awards good scores to networks that are able to both separate two at-some-point similar input sequences, as well as two sequences that used to differ in the past.
+They show that this measure too, is maximized at critical connectivity (K=2) for RBNs.
+
+% HERE I WRITTEN TTTO
 
 These reservoirs have dynamics which can be analysed.
 So if we find other networks with different topologies but similar dynamics,
 we should be able to use this new network as the 'reservoir' with a simple readout layer.
 
-If this area of research remains fruitful, it can be used to develop metrics for what other 'reservoirs' or materials might be useful as a  computational base.
+If this area of research remains fruitful,
+it can be used to develop metrics for what other 'reservoirs' or even physical materials might be useful as a computational base.
 This can be useful for evolution in materio, for selecting substrates \cite{evolutionInMaterio}
-
-
-\subsection{Dynamics and complexity of reservoirs}
-
-So we have all this litterature on complex systems (CITATIONS HERE) that show that optimal computing power is most often found on the 'edge of chaos', or the critical state, on the edge between periodic and chaotic dynamics.
-In addition we have a measure for computational power in RRN's developed in \cite{rbn-reservoir} that awards good scores to networks that are able to both separate two at-some-point similar input sequences, as well as two sequences that used to differ in the past.
-They show that this measure too, is maximized at critical connectivity (K=2) for RBNs.
 
 \subsection{What i actually done in this paper?}
 
@@ -59,9 +83,3 @@ using the following things for glue, regression, inspiration, and duct-tape.
   \item RBN Matlab toolbox for inspiration
   \item Homegrown RBN-simulator, Evolutionary alogrithm borrowed from friend
 \end{itemize}
-
-To look for what kinds of reservoirs might be useful for computations,
-the readout layer from a working RBN-Reservoir+Readout 'flow' was re-used to evolve new RBN-Reservoirs that could re-use this readout layer.
-
-The dynamics of this group of reservoirs is then analysed,
-showing whatever similarities there might be between these reservoirs.
