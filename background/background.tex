@@ -1,14 +1,76 @@
 \section{Background}
 
-\subsection{Liquid state machines / Echo state networks}
+\subsection{A brief introduction to boolean networks}
 
-\subsection{An introduction to random boolean networks}
+Random Boolean Networks, also known as Kaffman networks, were originally developed as a model of genetic regulatory networks \cite{kauffman1969metabolic}.
+The model makes no assumptions about the actual functioning of the nodes in the network,
+making them useful to model a wide range of phenomena.
+The simplification of a system to a boolean model doesn't pose a problem,
+as any multi-valued network can be transformed to a corresponding binary one.
+
+A RBN is usually described by its number of nodes $N$ and the in-degree $K$ of the nodes,
+that is, how many nodes each node depends on (also known as a nodes ancestors).
+RBNs can have both homogenous and heterogenous in-degrees.
+In heterogenous networks, one usually describes the average connectivity $<K>$ instead.
+
+Each node can have a state of zero or one.
+The next state of the node is solely determined by the current combination of states of its ancestors.
+Each combination leads to a new state of zero or one,
+with the probability given by a binomial distribution usually having $<p>=0.5$.
+
+In the classical RBN model (CRBN), all nodes update at the same time,
+therefore the states of the network at $t+1$ only depends on the states at $t$.
+This is a simplification that isn't quite accurate for all systems,
+notably gene regulation networks where the system doesn't operate in lockstep.
+There are therefore a number of updating schemes on the spectrum of determinism and randomness.
+
+Talk about phases, ordered, chaotic. K=2 critical.
+
+K, p, combinations giving critical dynamics. ONly statistical averages,
+not necessarily representative for actual networks.
+
+RBNs 
+
+\begin{figure}
+  \subfloat[Transition table for node a]{
+    \begin{tabular}{ c c | c}
+      \multicolumn{2}{c}{Ancestor states} & New state \\
+      \hline
+      0 & 0 & 1 \\
+      0 & 1 & 1 \\
+      1 & 0 & 0 \\
+      1 & 1 & 1 \\
+      0 & 0 & 0 \\
+      0 & 1 & 1 \\
+      1 & 0 & 0 \\
+      1 & 1 & 0 \\
+    \end{tabular}
+  }
+  \subfloat[Topology]{
+    \begin{tikzpicture}[node distance=2cm]
+      \node[vertex] (a) {a};
+      \node[vertex] (b) [below left of=a] {b};
+      \node[vertex] (c) [below right of=a] {c};
+
+      \draw[edge] (a) to[bend right] (b);
+      \draw[edge] (a) to (c);
+
+      \draw[edge] (b) to (a);
+      \draw[edge] (b) to[bend right] (c);
+
+      \draw[edge] (c) to[bend right] (a);
+      \draw[edge] (c) to (b);
+    \end{tikzpicture}
+  }
+  \caption{A simple RBN with N=3, K=2.}
+\end{figure}
+
 
 We use \cite{gershenson2004introduction} here and prob the original kaufmann papers.
 Talk about lambda n shit i guess.
 
-Kaufmann networks, N, K
-\todo[inline]{Show kaufmann network}
+
+\subsection{Liquid state machines / Echo state networks}
 
 \subsection{Using boolean networks in reservoir computing}
 
