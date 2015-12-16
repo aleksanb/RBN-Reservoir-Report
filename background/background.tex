@@ -9,7 +9,7 @@ The simplification of a system to a boolean model doesn't pose a problem,
 as any multi-valued network can be transformed to a corresponding binary one.
 
 A RBN is usually described by its number of nodes $N$ and the in-degree $K$ of the nodes,
-that is, how many nodes each node depends on (also known as a nodes ancestors).
+that is, how many nodes each node depends on (also known as its ancestors).
 RBNs can have both homogenous and heterogenous in-degrees.
 In heterogenous networks, one usually describes the average connectivity $<K>$ instead.
 
@@ -57,16 +57,43 @@ This is a simplification that isn't quite accurate for all systems,
 notably gene regulation networks where the system doesn't operate in lockstep.
 There are therefore a number of updating schemes on the spectrum of determinism and randomness.
 
+The dynamics of an RBN can be categorized as being in either the ordered, critical, or chaotic phase.
+These phases can be identified by how large a part of the network state is able to change over time,
+whether similar states tend to converge or diverge over time,
+and the networks resistance to perturbations (outside changes to the network).
 
-\todo[inline]{Talk about phases, ordered, chaotic. K=2 critical.}
-\todo[inline]{Make picture illustrating 3 phases}
+As these phases are easy to identify visually,
+we will plot the states of the RBN in a square lattice,
+with the network states plotted horizontally, and time flowing downwards.
+A node is drawn as white if its state is one, black otherwise.
+The phases are visualized in figure \ref{figure:rbn-phases}.
 
-K, p, combinations giving critical dynamics. ONly statistical averages,
-not necessarily representative for actual networks.
+\begin{figure}
+  \subfloat[Ordered phase, K=1]{
+    \includegraphics[width=0.3\columnwidth]{background/ordered-phase.pdf}
+    \label{figure:rbn-ordered}
+  }
+  \subfloat[Critical phase, K=2]{
+    \includegraphics[width=0.3\columnwidth]{background/critical-phase.pdf}
+    \label{figure:rbn-critical}
+  }
+  \subfloat[Chaotic phase, K=3]{
+    \includegraphics[width=0.3\columnwidth]{background/chaotic-phase.pdf}
+    \label{figure:rbn-chaotic}
+  }
 
-We use \cite{gershenson2004introduction} here and prob the original kaufmann papers.
-Talk about lambda n shit i guess.
+  \caption{Trajectories through state-space for RBNs with $N=30, K=[1,2,3]$, visualizing the different phases.}
+  \label{figure:rbn-phases}
+\end{figure}
 
+In general, RBNs in the critical phase are the most interesting.
+These are seemingly able to support both information transmission, storage and modification,
+capacities required for computation \cite{langton3computation}.
+Critical systems are found on the edge of chaos, on the phase transition between ordered and chaotic networks.
+For classical RBNs with $<p>=0.5$, critical networks are usually found at $<K>=2$ \cite{gershenson2004introduction},
+although one could still create networks with similar dynamics for different $K$.
+
+A more thorough introduction to RBNs is available in \cite{gershenson2004introduction}.
 
 \subsection{Using boolean networks in reservoir computing}
 
