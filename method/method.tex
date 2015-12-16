@@ -23,37 +23,6 @@ If the RBN-Reservoir has 'good' dynamics,
 the readout layer will be able to correctly classify the input stream.
 Such reservoir / readout layers are then stored, or 'pickled' to disk for later analysis and re-use.
 
-\subsection{Tasks}
-
-To measure RBN reservoir performance, a classification task is required.
-To simplify IO transformations from and to the reservoir system,
-a binary classification task, consisting of binary input data,
-where the reservoir consumes one bit at a time, is chosen.
-
-Two such tasks were introduced in \cite{rbn-reservoir}: Temporal Density and Temporal Parity.
-Both require the reservoir to be able to retain information for a sliding window of size $ n $,
-offset by some value $ t $, back through the input stream.
-The temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
-the temporal density task to determine whether there were a majority of ones.
-The former is visualized in figure \ref{figure:temporal-parity}.
-
-\begin{figure}
-  \subfloat[Input]{
-    \includegraphics[width=\columnwidth]{method/temporal_parity-10-200-3-input.pdf}
-  }
-
-  \subfloat[Correct output]{
-    \includegraphics[width=\columnwidth]{method/temporal_parity-10-200-3-output.pdf}
-  }
-
-  \caption{
-    The first 30 elements of a Temporal Parity task with $[n=3, t=0]$.
-    A one is visualized as white, while a zero is black.
-    We see that correct output at time $i$ is equal to there being an odd number of $1$s in inputs $[i, i-1, i-2]$
-  }
-  \label{figure:temporal-parity}
-\end{figure}
-
 \subsection{Find some other place for this?}
 
 It seems that for a random sample of reservoirs of a given size and connetivity,

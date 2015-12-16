@@ -93,25 +93,75 @@ Critical systems are found on the edge of chaos, on the phase transition between
 For classical RBNs with $<p>=0.5$, critical networks are usually found at $<K>=2$ \cite{gershenson2004introduction},
 although one could still create networks with similar dynamics for different $K$.
 
-A more thorough introduction to RBNs is available in \cite{gershenson2004introduction}.
+A thorough introduction to the field of RBNs is available in \cite{gershenson2004introduction}.
 
-\subsection{Using boolean networks in reservoir computing}
+\subsection{RBN-Reservoir systems}
 
-Can we use these simple networks for computation?
-Turns out Yes!, as shown in this paper \cite{rbn-reservoir}, and it works reasonably well.
+How does one adapt a RBN for use as a reservoir in a RBN-RC device?
+RBNs aren't usually designed to take external input.
+We do however, have the concept of perturbation,
+the external flipping of bits in the networks state,
+transition tables or edges.
+This can be utilized to create RBNs that take input,
+by continiously perturbing the RBN nodes by the bits of the input sequence.
 
-Takeaways from the paper:
-\begin{itemize}
-  \item Relationship between dynamical properties and computational power
-  \item Required connections to input layer, how much perturbation required?
-\end{itemize}
+Questions that follow are how many bits should the network consume at a time,
+how many of the node in the network should be perturbed by the input at each timestep,
+and how should one read out the values from the network.
+Finally, what dynamics must such a reservoir contain to allow for the computation of interesting problems?
 
-Advantages include being MUCH less complex than Echo-state networks and similar, as those require operations such as 'multiplication' which is orders more complex than the simple lookup-table transitions for the RBN nodes.
+In \cite{rbn-reservoir} the authors create and analyze functioning RBN-RC systems.
+These RBN-RC systems have heterogenous connectivity,
+consume one bit of input at each timestep ($I=1$),
+perturbing $L$ of the $N$ nodes in the process.
+This setup is shown in figure \ref{figure:rbn-reservoir}.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{background/RBN-Reservoir.pdf}
+  \caption{RBN-Reservoir system with $I=1, L=2, K=2, N=5$.
+  Readout layer can be any node performing some kind of learning of the reservoir state against expected output for the current task (e.g. linear regression).}
+  \label{figure:rbn-reservoir}
+\end{figure}
 
-\begin{itemize}
-  \item LSM / ESN
-  \item 2013-RBN Paper
-  \item RBN-Kauffmann networks
-  \item Sipper programming complexity (Fra TDT1/22) Snakk om vanskeligheten av å programmere
-\end{itemize}
+The computational capability of an RBN as a reservoir is found to be at maximum when its ability to forget past perturbations
+while simultaneoutly being able to separate diverged input sequences is maximized.
+These two properties are coined \textit{fading memory} and \textit{separation property},
+the computational capability $\Delta$ measured as the maximization of both.
+Analyzing different RBN-reservoirs with this metric,
+a high $\Delta$ is found to correlate with critical connectivity ($<K>=2$).
+
+It is found that the optimal amount of reservoir perturbance,
+adjustable by the number of connections between the input layer and the reservoir,
+depends on both the task size, how many steps in time are required to be remembered,
+and the dynamics of the reservoir.
+\textit{Chaotic reservoirs} require few input connections to be able to properly spread information,
+but perform poorly on larger tasks due to past perturbations still floating around the reservoir.
+\textit{Ordered reservoirs} quickly forget past perturbations, allowing some success for larger tasks,
+but their inability to remember past perturbations renders them useless for many tasks.
+\textit{Critical reservoirs} require connectivity somewhere in the middle.
+Able to forget as well as remember, they perform accurately independent of task size.
+
+To measure the real-life performance and accuracy of the RBN-reservoir systems, two tasks were introduced: Temporal Density and Temporal Parity.
+Both require the reservoir to be able to retain information for a sliding window of size $ n $,
+offset by some value $ t $, back through the input stream.
+The temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
+the temporal density task to determine whether there were a majority of ones.
+The former is visualized in figure \ref{figure:temporal-parity}.
+
+\begin{figure}
+  \subfloat[Input]{
+    \includegraphics[width=\columnwidth]{background/temporal_parity-10-200-3-input.pdf}
+  }
+
+  \subfloat[Correct output]{
+    \includegraphics[width=\columnwidth]{background/temporal_parity-10-200-3-output.pdf}
+  }
+
+  \caption{
+    The first 30 elements of a Temporal Parity task with $[n=3, t=0]$.
+    A one is visualized as white, while a zero is black.
+    We see that correct output at time $i$ is equal to there being an odd number of $1$s in inputs $[i, i-1, i-2]$
+  }
+  \label{figure:temporal-parity}
+\end{figure}
