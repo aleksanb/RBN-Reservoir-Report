@@ -97,6 +97,8 @@ A thorough introduction to the field of RBNs is available in \cite{gershenson200
 
 \subsection{RBN-Reservoir systems}
 
+\todo[inline]{Do i need a section here presenting traditional RC systems, or is the description in the introduction good enough?}
+
 How does one adapt a RBN for use as a reservoir in a RBN-RC device?
 RBNs aren't usually designed to take external input.
 We do however, have the concept of perturbation,
@@ -149,7 +151,8 @@ Both require the reservoir to be able to retain information for a sliding window
 offset by some value $ t $, back through the input stream.
 The temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
 the temporal density task to determine whether there were a majority of ones.
-The former is visualized in figure \ref{figure:temporal-parity}.
+The former is visualized in figure \ref{figure:temporal-parity},
+and will be used to benchmark the reservoirs created later in this paper.
 
 \begin{figure}
   \subfloat[Input]{
@@ -167,3 +170,6 @@ The former is visualized in figure \ref{figure:temporal-parity}.
   }
   \label{figure:temporal-parity}
 \end{figure}
+
+\subsection{Genetic algorithms}
+\todo[inline]{Should i have this section here, or should i talk about GA in the Method section instead? How much use really is a huge background chapter on GA/EAs here? Where would i put discussions on choice of genome (that should perhaps go in the discussion section after results or simething?}

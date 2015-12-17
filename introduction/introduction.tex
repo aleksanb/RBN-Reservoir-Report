@@ -7,13 +7,16 @@ transforming it from a temporal to a spacial one in the reservoir, making it the
 In this paper we investigate the dynamics of Reservoir Computing systems where the reservoir is a Random Boolean Network (RBN) \cite{gershenson2004introduction},
 an approach found fruitful in \cite{rbn-reservoir}.
 
-First we reproduce chosen experiments from \cite{rbn-reservoir}, creating a working RBN-reservoir computing system (RRC).
+First we create a working RBN-reservoir computing system (RRC) in the Python programming language,
+reproducing chosen experiments from \cite{rbn-reservoir}.
 
-Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was trained on,
+Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was originally trained on,
 and still stay accurate on the original classification task.
-These functionally equivalent reservoirs will be found through the use of an evolutionary algorithm.
+These functionally equivalent reservoirs, if any, will be evolved through the use of a genetic algorithm (GA).
 
-Last we look at the dynamics and characteristics of these groups of RBN-Reservoirs, attempting to find any similarities that might be exploitable.
+Finally we look at the dynamics and characteristics of these groups of RBN-Reservoirs, attempting to find any similarities that might be exploitable.
+
+\todo[inline]{Mention something about the many-to-one mapping of readout->reservoir leading to the possibility of using a generative genome here, or take that later?}
 
 \subsection{A brief introduction to reservoir computing}
 
@@ -56,30 +59,15 @@ In general, one wishes to use a reservoir with a complexity matching that of the
 Utilizing a modern processor to predict a very simple timeseries would be a classic case of shooting sparrows with cannons \cite{wiki:sparrow},
 while achieving the same using a RBN or CA might be more impressive.
 
-\todo[inline]{Gotta finish introduction from hereon and down}
+In general the computational power of a complex system is the highest when the system is on the edge of chaos \cite{langton3computation}.
+In \cite{rbn-reservoir}, the authors find that this also holds for RBN based reservoir systems.
+They also propose a metric for predicting the computational power of RBNs,
+which is found to correlate with actual performance.
 
-So we have all this litterature on complex systems (CITATIONS HERE) that show that optimal computing power is most often found on the 'edge of chaos', or the critical state, on the edge between periodic and chaotic dynamics.
-In addition we have a measure for computational power in RRN's developed in \cite{rbn-reservoir} that awards good scores to networks that are able to both separate two at-some-point similar input sequences, as well as two sequences that used to differ in the past.
-They show that this measure too, is maximized at critical connectivity (K=2) for RBNs.
+In addition one can look at the attractor lengths and transient times of a RBN,
+and attempt to uncover any insights that might be available there,
+even though they might not correlate with actual performance due to the continious perturbance of the network.
 
-% HERE I WRITTEN TTTO
-
-These reservoirs have dynamics which can be analysed.
-So if we find other networks with different topologies but similar dynamics,
-we should be able to use this new network as the 'reservoir' with a simple readout layer.
-
-If this area of research remains fruitful,
-it can be used to develop metrics for what other 'reservoirs' or even physical materials might be useful as a computational base.
-This can be useful for evolution in materio, for selecting substrates \cite{evolutionInMaterio}
-
-\subsection{What i actually done in this paper?}
-
-A rbn-simulator was developed in the Python programming language,
-using the following things for glue, regression, inspiration, and duct-tape.
-
-\begin{itemize}
-  \item MDP + Oger for putting nodes in a flow, and regressing
-  \item Numpy + Scipy for numerical calculations, array backing
-  \item RBN Matlab toolbox for inspiration
-  \item Homegrown RBN-simulator, Evolutionary alogrithm borrowed from friend
-\end{itemize}
+These metrics can be used to categorize the computational power of other reservoirs,
+even physical materials \cite{miller2002evolution},
+and will be useful through this paper.
