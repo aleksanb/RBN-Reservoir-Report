@@ -39,19 +39,33 @@ as well as always being at least as accurate as ordinary least squares.
 
 This process is repeated for all the datasets,
 and the final regression parameters are chosen as a combination of the parameters obtained for each individual dataset.
-Finally we measure the accuracy of the trained reservoir on the test dataset,
-obtaining a normalized accuracy score defined as follows.
-
-$$ Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_output)} $$.
-
-If the RRC system achieved a high accuracy on a task,
-it can then be stored (also known as 'pickled') for further research.
+Finally we measure the normalized accuracy of the trained reservoir on the test dataset,
+defined as
+\begin{equation}
+Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_output)}
+\label{formula:accuracy}
+\end{equation}
+.
+If the RRC system achieved a high accuracy on an interesting task,
+it can be stored ('pickled') to disk for further research.
 
 \subsection{The evolving of functionally similar RBNs for existing readout layers}
 
-To investigate the feasibility of evolving RBNs, a genetic algorithm is implemented.
+To investigate the potential many-to-one mapping between RBN-reservoirs and readout layers,
+we'll be using a genetic algorithm to evolve candidate RBNs,
+using a fixed test dataset and readout layer for fitness evaluation.
 
-\todo[inline]{Introduction, Fitness function, parent selection and crossover}
+A genetic algorithm is an advanced probabilistic search method using operations inspired by natural evolution to traverse the solution space of the problem.
+It mimics natural evolution by creating a population of children where some will grow up to adults,
+the fittest of which reproduce the most.
+The newly created offspring receives a genome derived from its parents,
+using a combination of genome crossover and random mutations to push the search forward.
+
+Good choices for genome representations and fitness functions make GAs excellent for finding solutions to optimisation problems.
+Good hyperparameters (parameters for the GA run itself, i.e. crossover rate, adult and child population sizes)
+have to be found for each separate problem domain due to the No Free Lunch Theorem.
+
+\subsubsection{Genotype and phenotype representation}
 
 We let the genotype be a direct encoding of the corresponding RBN graph.
 Such an encoding is significantly larger than a generative encoding,
@@ -60,8 +74,10 @@ but less complex as well as able to generate all individuals in the fitness land
 Each node needs to represent whether it is connected to the input node,
 who its neighbors are, and what its transition rule is.
 As we only look at homogenous RBNs,
-we can use a fixed-length genome of total length $ n\_nodes \cdot (connectivity + 2) $.
-
+we can use a fixed-length genome with
+\begin{equation}
+genome\_length = n\_nodes \cdot (connectivity + 2)
+\end{equation}
 To further simplify GA implementation,
 we let all symbols in the genome take a value in the range $[0, max\_required\_in\_genome)$.
 The actual symbol values are then computed modulo the largest actual value they could take on
@@ -88,6 +104,57 @@ Note that this representation sets no limitations on input connectivity or uniqu
     shown here for an RBN with $N=3, K=2$.}
   \label{figure:rbn-genotype}
 \end{figure}
+
+\subsubsection{Fitness function}
+
+Each GA run is parameterized with an already-trained and accurate readout layer (separated from its RBN-reservoir),
+as well as a single test dataset of the same origins as the dataset used for training the readout layer.
+After converting each genotype to its corresponding phenotype,
+the resulting RBN is connected to the readout-layer and fed with the fixed test dataset.
+The accuracy obtained,
+as calculated in formula \ref{formula:accuracy},
+is used as the fitness of the phenotype.
+
+\subsubsection{GA hyperparameters}
+
+The hyperparameters for the GA are presented in table \ref{table:ga-hyperparameters}.
+
+\begin{table}
+  \centering
+  \caption{GA hyperparameters}
+  \label{table:ga-hyperparameters}
+  \begin{tabular}{ll}
+    Children pool size             & 40                                    \\
+    Adult pool size                & 40                                    \\
+    Fitness satisfaction threshold & 0.98                                  \\
+    maximum generations            & 200                                   \\
+    Adult selection                & Generational mixing                   \\
+    Parent selection               & Tournament selection(K=8)             \\
+    Genome crossover               & Per component crossover (p=0.5)       \\
+    Genome mutation                & Per genome component mutation (p=0.1) \\
+  \end{tabular}
+\end{table}
+
+Adult selection is simple generational mixing,
+selecting the best 40 specimens from the combined children and adult populations.
+Per component crossover will with a probability p either pass through the entire genome from the left parent,
+or for each component chose either the left or right parents value with a probability 0.5.
+Per genome component mutation will reroll each genome component with probability p.
+This value is set relatively high (0.1) due to experiments showing a much faster convergence rate than with the initial chosen value of 0.01.
+
+The temporal parity task will be used for evaluating the evolved RBNs with parameters as set in table \ref{table:dataset-parameters}.
+
+\begin{table}
+  \centering
+  \caption{Task parameters}
+  \label{table:dataset-parameters}
+  \begin{tabular}{ll}
+    Task type       & Temporal Parity \\
+    Dataset length  & 200             \\
+    Window size (N) & 3               \\
+    Offset (T)      & 0               \\
+  \end{tabular}
+\end{table}
 
 \subsection{Find some other place for this?}
 
