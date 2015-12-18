@@ -1,10 +1,42 @@
 \section{Method}
 
-\todo[inline]{Explain why measurements, and how measurements.}
+Why do we measure, what will we measure, and how will we measure it?
 
-\subsection{How measurements will be performed}
+We wish to verify the viability of RRC systems.
+This requres us to be able to reproduce at least some previously published results.
+Therefore, we will create a functioning RRC system, as in \cite{rbn-reservoir},
+and test it on the datasets presented in the same paper.
+We will also re-use the computational capability measure introduced there,
+and see if the relationship between it and accuracy can be recreated.
 
-\subsection{The creation of a RBN}
+Secondly, we wish to test the effectiveness of creating new RBN rervoirs for existing readout layers through artificial evolution.
+If this is found to be the case, it would imply a many-to-one correspondence between RBN-reservoirs and readout layers.
+These sets of re-useable  reservoirs must necessarily have some similar characteristics,
+to allow our re-use of the readout layer to make sense.
+We will look at these reservoirs, attempting to find any similarities there might be.
+In addition, such a finding can shed light on the optimal genome representation to use for evolving RBN reservoirs.
+
+The following systems have been implemented to investigate the stated questions.
+
+\begin{itemize}
+  \item An RBN simulator
+  \item Procedures for analyzing and visualizing RBNs
+  \item Procedures for creating classification tasks
+
+  \item An RBN-Reservoir Computing system using:
+  \begin{itemize}
+    \item The forementioned RBN simulator as a reservoir
+    \item The ridge regression node from the Oger RC toolkit \cite{verstraeten2012oger} as readout layer
+    \item The Python Modular toolkit for Data Processing \cite{zito2008modular} for glue and training of the RRC system.
+  \end{itemize}
+  \item A system for evolving RBNs given certain constraints, using a genetic algorithm based on the one used in \cite{farstad2015evolving}.
+\end{itemize}
+
+The codebase is available on GitHub \cite{forprosjekt-code-github} under a soon-to-be permissive licence.
+
+\subsection{The creation of an RBN}
+
+\todo[inline]{Perhaps this section?}
 
 \subsection{The creation of a functioning RRC system}
 
