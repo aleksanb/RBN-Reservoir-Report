@@ -38,7 +38,30 @@ The codebase is available on GitHub \cite{forprosjekt-code-github} under a soon-
 
 \todo[inline]{Perhaps this section?}
 
-\subsection{The creation of a functioning RRC system}
+\subsection{The creation and training of a functioning RRC system}
+
+The final RRC system is shown as a block diagram in \ref{figure:rrc-block},
+and the actual network topology is equivalent as the one in figure \ref{figure:rbn-reservoir}.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \node (dataset) {Dataset};
+    \node[box, below=of dataset] (input) {Input layer};
+    \node[box, right=of input] (reservoir) {RBN Reservoir};
+    \node[box, right=of reservoir] (readout) {Readout layer};
+    \node[above=of readout] (classification) {Classification};
+
+    \node[draw,dotted,fit=(input) (reservoir) (readout), label={RRC}] {};
+
+    \draw[edge] (dataset) to (input);
+    \draw[edge] (input) to (reservoir);
+    \draw[edge] (reservoir) to (readout);
+    \draw[edge] (readout) to (classification);
+  \end{tikzpicture}
+  \caption{Block diagram of the RRC processing a dataset.}
+  \label{figure:rrc-block}
+\end{figure}
 
 The training process for a RRC system is threefold.
 
