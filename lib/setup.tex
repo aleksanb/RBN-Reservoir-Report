@@ -34,8 +34,39 @@
 }
 
 \usepackage{tikz}
-\usetikzlibrary{arrows}
-\usetikzlibrary{fit}
+\usetikzlibrary{shapes, arrows, fit, calc}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=2em}}
 \tikzset{edge/.style = {->, > = latex'}}
 \tikzset{box/.style = {shape=rectangle,draw, minimum size=1.5cm}}
+
+\usepackage{pgfplots}
+%\pgfplotsset{compat=1.8}
+\usepgfplotslibrary{statistics}
+
+\newcommand{\myboxplot}[2]{
+  \begin{tikzpicture}
+    \pgfplotsset{
+      boxplot/every box/.style={fill=gray, minimum height=1cm},
+      boxplot/every whisker/.style={fill=black, color=black},
+      boxplot/box extend=0.6
+    }
+    \begin{axis}
+      [
+        axis x line=bottom,
+        axis y line=left,
+        minor y tick num={1},
+        minor x tick num={1},
+        xmin=0,
+        xmax=10,
+        ymax=1.05,
+        scaled x ticks={real:#2},
+        axis y discontinuity=crunch,
+        xtick scale label code/.code={},
+        boxplot/draw direction=y,
+        xlabel=Connectivity,
+        ylabel=Accuarcy,
+      ]
+      #1
+    \end{axis}
+  \end{tikzpicture}
+}
