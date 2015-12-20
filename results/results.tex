@@ -1,44 +1,78 @@
 \section{Results}
 
-\begin{figure}
-  \resizebox{\columnwidth}{!}{
-    \subfloat[a]{
+\begin{figure*}[!t]
+  \resizebox{\textwidth}{!}{
+    \subfloat{
+      \input{results/distribution-100-3-1.tex}
+    }
+    \subfloat{
       \input{results/distribution-100-3.tex}
     }
-    \subfloat[b]{
+    \subfloat{
+      \input{results/distribution-100-3-3.tex}
+    }
+  }
+
+  \resizebox{\textwidth}{!}{
+    \subfloat{
+      \myscatterplot{results/computational-power-100-3-1.dat}
+    }
+    \subfloat{
+      \myscatterplot{results/computational-power-100-3.dat}
+    }
+    \subfloat{
+      \myscatterplot{results/computational-power-100-3-3.dat}
+    }
+  }
+  \caption{Figures a-c show the average performance with K=[1,2,3] for temporal 100 3. We see that 1 sucks a bit compared to 2 and 3, although 2 and 3 both work.}
+\end{figure*}
+
+\begin{figure*}[!t]
+  \resizebox{\textwidth}{!}{
+    \subfloat{
+      \input{results/distribution-100-5-1.tex}
+    }
+    \subfloat{
       \input{results/distribution-100-5.tex}
     }
+    \subfloat{
+      \input{results/distribution-100-5-3.tex}
+    }
   }
+  \caption{Here we plot the fitness against connectivity for K=[1,2,3] with temporal 100 5. We can see this is much more difficile tha le before. This difference is kinda weird as K=2 should perform better, but that considers a heterogenous reservoir, while we use the homogenous one. There might also be unaccounted differences in reservoir size that affect this LOL w8 this is consistent after all just read their plots correctly.}
+\end{figure*}
 
-  \resizebox{\columnwidth}{!}{
-    \subfloat[c]{
-      \input{results/computational-power-100-3.tex}
-    }
-    \subfloat[d]{
-      \input{results/computational-power-100-5.tex}
-    }
-  }
-\end{figure}
-
-\begin{figure}
-  \resizebox{\columnwidth}{!}{
-    \subfloat[a]{
-      \input{results/distribution-200-3.tex}
-    }
-    \subfloat[b]{
-      \input{results/distribution-200-5.tex}
-    }
-  }
-
-  \resizebox{\columnwidth}{!}{
-    \subfloat[c]{
-      \input{results/computational-power-200-3.tex}
-    }
-    \subfloat[d]{
-      \input{results/computational-power-200-5.tex}
-    }
-  }
-\end{figure}
+%\begin{figure*}[!t]
+%  \resizebox{\textwidth}{!}{
+%    \subfloat{
+%      \input{results/distribution-100-3.tex}
+%    }
+%    \subfloat{
+%      \input{results/distribution-100-5.tex}
+%    }
+%    \subfloat{
+%      \input{results/distribution-200-3.tex}
+%    }
+%    \subfloat{
+%      \input{results/distribution-200-5.tex}
+%    }
+%  }
+%
+%  \resizebox{\textwidth}{!}{
+%    \subfloat{
+%      \input{results/computational-power-100-3.tex}
+%    }
+%    \subfloat{
+%      \input{results/computational-power-100-5.tex}
+%    }
+%    \subfloat{
+%      \input{results/computational-power-200-3.tex}
+%    }
+%    \subfloat{
+%      \input{results/computational-power-200-5.tex}
+%    }
+%  }
+%\end{figure*}
 
 \subsection{Using RBN-reservoirs in solving time-series tasks}
 
