@@ -40,64 +40,20 @@
     }
   }
 
-  %\resizebox{\textwidth}{!}{
-  %  \subfloat{
-  %    \myscatterplot{results/figures/computational-power-100-5-1.dat}
-  %  }
-  %  \subfloat{
-  %    \myscatterplot{results/figures/computational-power-100-5-2.dat}
-  %  }
-  %  \subfloat{
-  %    \myscatterplot{results/figures/computational-power-100-5-3.dat}
-  %  }
-  %}
+  \resizebox{\textwidth}{!}{
+    \subfloat{
+      \myscatterplot{results/figures/computational-power-100-5-1.dat}
+    }
+    \subfloat{
+      \myscatterplot{results/figures/computational-power-100-5-2.dat}
+    }
+    \subfloat{
+      \myscatterplot{results/figures/computational-power-100-5-3.dat}
+    }
+  }
   \caption{Figures a-c show the average performance with K=[1,2,3] for temporal 100 3. We see that 1 sucks a bit compared to 2 and 3, although 2 and 3 both work.}
 \end{figure*}
-%\begin{figure*}[!t]
-%  \resizebox{\textwidth}{!}{
-%    \subfloat{
-%      \input{results/figures/distribution-100-5-1.tex}
-%    }
-%    \subfloat{
-%      \input{results/figures/distribution-100-5.tex}
-%    }
-%    \subfloat{
-%      \input{results/figures/distribution-100-5-3.tex}
-%    }
-%  }
 %  \caption{Here we plot the fitness against connectivity for K=[1,2,3] with temporal 100 5. We can see this is much more difficile tha le before. This difference is kinda weird as K=2 should perform better, but that considers a heterogenous reservoir, while we use the homogenous one. There might also be unaccounted differences in reservoir size that affect this LOL w8 this is consistent after all just read their plots correctly.}
-%\end{figure*}
-
-%\begin{figure*}[!t]
-%  \resizebox{\textwidth}{!}{
-%    \subfloat{
-%      \input{results/distribution-100-3.tex}
-%    }
-%    \subfloat{
-%      \input{results/distribution-100-5.tex}
-%    }
-%    \subfloat{
-%      \input{results/distribution-200-3.tex}
-%    }
-%    \subfloat{
-%      \input{results/distribution-200-5.tex}
-%    }
-%  }
-%
-%  \resizebox{\textwidth}{!}{
-%    \subfloat{
-%      \input{results/computational-power-100-3.tex}
-%    }
-%    \subfloat{
-%      \input{results/computational-power-100-5.tex}
-%    }
-%    \subfloat{
-%      \input{results/computational-power-200-3.tex}
-%    }
-%    \subfloat{
-%      \input{results/computational-power-200-5.tex}
-%    }
-%  }
 %\end{figure*}
 
 \subsection{Using RBN-reservoirs in solving time-series tasks}
@@ -123,15 +79,16 @@ For each readout layer, we run the evolutionary algorithm 30 times.
       [
         xmin=0, xmax=220,
         xlabel=GA Termination generation,
+        ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
-          {L50 \#1},
-          {L50 \#2},
-          {L50 \#3},
-          {L70 \#1},
-          {L70 \#2}
+          {L50\#1},
+          {L50\#2},
+          {L50\#3},
+          {L70\#1},
+          {L70\#2}
         },
-        yticklabel style={align=center},
+        yticklabel style={align=center, font=\small},
       ]
       \addplot+[boxplot]
       table[y index=0] {results/figures/final-1-generations.dat};
@@ -160,16 +117,17 @@ For each readout layer, we run the evolutionary algorithm 30 times.
       [
         xmin=30, xmax=70,
         axis x discontinuity=crunch,
-        xlabel=Evolved RBN connectivity,
+        xlabel=Evolved RBN input connectivity,
+        ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
-          {L50 \#1},
-          {L50 \#2},
-          {L50 \#3},
-          {L70 \#1},
-          {L70 \#2}
+          {L50\#1},
+          {L50\#2},
+          {L50\#3},
+          {L70\#1},
+          {L70\#2}
         },
-        yticklabel style={align=center},
+        yticklabel style={align=center, font=\small},
       ]
       \addplot+[boxplot]
       table[y index=0] {results/figures/final-1-connectivity.dat};
@@ -187,7 +145,8 @@ For each readout layer, we run the evolutionary algorithm 30 times.
       table[y index=0] {results/figures/N100K2L70-2-connectivity.dat};
     \end{axis}
   \end{tikzpicture}
-  \caption{Connectivity for evolved RBNS. Extremely similar to the original connectivity of 50!}
+  \caption{Connectivity for evolved RBNS.
+           Observe that the connectivity distribution of the evolved RBNs is heavily skewed towards 50, regardless of the input connectivity of the original RBN.}
 \end{figure}
 
 \begin{figure}
@@ -196,15 +155,16 @@ For each readout layer, we run the evolutionary algorithm 30 times.
     \begin{axis}
       [
         xlabel=Evolved RBN computational capability,
+        ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
-          {L50 \#1},
-          {L50 \#2},
-          {L50 \#3},
-          {L70 \#1},
-          {L70 \#2}
+          {L50\#1},
+          {L50\#2},
+          {L50\#3},
+          {L70\#1},
+          {L70\#2}
         },
-        yticklabel style={align=center},
+        yticklabel style={align=center, font=\small},
         x tick label style={/pgf/number format/fixed},
       ]
       \addplot+[boxplot]

@@ -34,21 +34,18 @@ The following systems have been implemented to investigate the stated questions.
 
 The codebase is available on GitHub \cite{forprosjekt-code-github} under a soon-to-be permissive licence.
 
-\subsection{Measuring dynamics}
+\subsection{Measuring computational capability}
 
-\begin{itemize}
-  \item
-    How do i estimate computational power?
-    Use the complexity measure from \cite{rbn-reservoir} of course!
-  \item
-    How do i estimate transient times and attractor lengths?
-    Random samling! Link to some algorithm i use here
-  \item
-    Fun Anecdote: Link to that paper measuring power usage in RBN-Reservoirs:
-    \cite{rbn-reservoir-energy-efficiency}
-\end{itemize}
+We will be using the computational complexity measure introduced in \ref{section:computational-capability} to analyze the created RBNs.
 
-Attractor lengths and such: This might be useful \cite{berdahl2009random}
+% \item
+%   How do i estimate transient times and attractor lengths?
+%   Random samling! Link to some algorithm i use here
+% \item
+%   Fun Anecdote: Link to that paper measuring power usage in RBN-Reservoirs:
+%   \cite{rbn-reservoir-energy-efficiency}
+
+% Attractor lengths and such: This might be useful \cite{berdahl2009random}
 
 \subsection{The creation and training of a functioning RRC system}
 
@@ -74,6 +71,38 @@ and the actual network topology is equivalent as the one in figure \ref{figure:r
   \caption{Block diagram of the RRC processing a dataset.}
   \label{figure:rrc-block}
 \end{figure}
+
+\subsubsection{testing}
+
+To verify that RBN simulation is working,
+a RBN is created randomly, initial state set to all zeros, and ran.
+The results are visualized in figure \ref{figure:rbn-noperturb}.
+We see that the RBN exhibits stable dynamics, and enters into an attractor around $t=15$.
+In figure \ref{figure:rbn-perturb} we continiously perturb the RBN with the input stream from the Temporal Parity task visualized in \ref{figure:temporal-parity}.
+In the perturbed case, the state trajectory is continiously changed, preventing the RBN from settling into an attractor.
+Interestingly enough, there seems to be a visual similarity between the two cases.
+Such a pattern is sure to dissapear with a RBN in the chaotic phase.
+
+This erratic pattern of state transitions is then fed into the readout layer,
+which is then tasked with finding a linear combination of the RBN states that results in the expected output for the given task.
+
+\begin{figure}
+  \subfloat[Unperturbed]{
+    \includegraphics[width=0.5\columnwidth]{method/final-1-noperturb.pdf}
+    \label{figure:rbn-noperturb}
+  }
+  \subfloat[Perturbed]{
+    \includegraphics[width=0.5\columnwidth]{method/final-1-perturb.pdf}
+    \label{figure:rbn-perturb}
+  }
+  \caption{
+    The same RBN ($N=100, K=2, P=0.5, L=50$) shown both perturbed and unperturbed.
+    The boolean states of the RBN are plotted along the X-axis,
+    with time flowing downwards.
+  }
+\end{figure}
+
+\subsubsection{training}
 
 The training process for a RRC system is threefold.
 
