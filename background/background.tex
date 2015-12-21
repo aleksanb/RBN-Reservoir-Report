@@ -196,3 +196,16 @@ but perform poorly on larger tasks due to past perturbations still floating arou
 but their inability to remember past perturbations renders them useless for many tasks.
 \textit{Critical reservoirs} require connectivity somewhere in the middle.
 Able to forget as well as remember, they perform accurately independent of task size.
+
+\subsection{Genetic Algorithms}
+\label{section:background:ga}
+
+A genetic algorithm is an advanced probabilistic search method using operations inspired by natural evolution to traverse the solution space of the problem.
+It mimics natural evolution by creating a population of children where some will grow up to adults,
+the fittest of which reproduce the most.
+The newly created offspring receives a genome derived from its parents,
+using a combination of genome crossover and random mutations to push the search forward.
+
+Good choices for genome representations and fitness functions make GAs excellent for finding solutions to optimisation problems.
+Good hyperparameters (parameters for the GA run itself, i.e. genome crossover rate, adult and child population sizes)
+have to be found for each separate problem domain due to the No Free Lunch Theorem.

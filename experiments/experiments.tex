@@ -1,6 +1,6 @@
 \section{Experiments}
 
-\subsection{Reproduce previous results}
+\subsection{Reproducing previous results}
 
 In \cite{rbn-reservoir} the authors find a relationship between computational capability and performance,
 that certain values of $L$ give the best reservoir performance,
@@ -8,13 +8,14 @@ and that RBNs with connectivity $\langle K \rangle =2$ should outperform other c
 To test these assertions,
 we must create and benchmark a number of functioning RBN reservoir systems,
 noting their accuracy on the chosen task as well as their computational capability.
+Plotting these values against each other will shed light on whether their claims strike true.
 
 We will be using two versions of the \textit{temporal parity} task
 (as specified in table \ref{table:task-parameters}) to measure reservoir performance.
 The temporal parity task is chosen over temporal density as it is the more difficult task
 (shown in \cite{rbn-reservoir}), presumably resulting in more interesting and rich resevoirs.
 
-\begin{table}
+\begin{table}[h]
   \centering
   \caption{Task parameters}
   \label{table:task-parameters}
@@ -31,8 +32,11 @@ The temporal parity task is chosen over temporal density as it is the more diffi
 As the number of different RBNs is oppressively large,
 $(\frac{2^{2^{K}}N!}{(N-K)!})^N$ \cite{gershenson2004introduction},
 we therefore create 30 random specimens for each combination of the RBN parameters displayed in table \ref{table:rbn-combinations}.
+This results in 300 samples for each RBN N-K combination for each task.
+Note that the created RBNs have homogenous connectivity,
+as opposed to the heterogenous connectivity in \cite{rbn-reservoirs}.
 
-\begin{table}
+\begin{table}[h]
   \centering
   \caption{RBN combinations}
   \label{table:rbn-combinations}
@@ -44,4 +48,32 @@ we therefore create 30 random specimens for each combination of the RBN paramete
   \end{tabular}
 \end{table}
 
-\subsection{Evolving reservoirs to re-use existing readout layers}
+\subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
+
+We use the genetic algorithm presented in section \label{section:method:evolving-rbns} to evolve functionally equivalent RBNs (hyperparameters as in table \ref{table:ga-hyperparameters}).
+
+We now pick 5 RBN reservoir systems,
+chosen for their $> 99.5\%$ accuracy on the Temporal Parity task shown in table
+\ref{table:ga-task-parameters},
+and store their trained readout layers.
+All 5 RBNs have $N=100, K=2$, three of the RBNs having an input connectivity of $L=50$,
+the remaining two $L=70$.
+This will allow us to measure if the functionally equivalent reservoirs for the readout layers trained on reservoirs with $L=50$ differ from the ones with $L=70$.
+
+\begin{table}[h]
+  \centering
+  \caption{GA Task parameters}
+  \label{table:ga-task-parameters}
+  \begin{tabular}{ll}
+    Task type         & Temporal Parity \\
+    Num. datasets     & 10               \\
+    Dataset length    & 200             \\
+    $N$ (window size) & 3               \\
+    $t$ (offset)      & 0               \\
+  \end{tabular}
+\end{table}
+
+For each readout layer we create a new instance of the Temporal Parity task used to train it originally.
+We then run the GA 30 times with this readout layer–dataset combination,
+sampling only the best specimen from each final generation.
+This to keep our influence from evolutionary inbreeding to a minimum.

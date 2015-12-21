@@ -138,21 +138,12 @@ Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_ou
 If the RRC system achieved a high accuracy on an interesting task,
 it can be stored ('pickled') to disk for further research.
 
-\subsection{The evolving of functionally similar RBNs for existing readout layers}
+\subsection{The evolving of functionally equivalent RBN reservoirs for existing readout layers}
+\label{section:method:evolving-rbns}
 
 To investigate the potential many-to-one mapping between RBN-reservoirs and readout layers,
-we'll be using a genetic algorithm to evolve candidate RBNs,
+we'll be using a genetic algorithm (as presented in section \ref{section:background:ga}) to evolve candidate RBNs,
 using a fixed test dataset and readout layer for fitness evaluation.
-
-A genetic algorithm is an advanced probabilistic search method using operations inspired by natural evolution to traverse the solution space of the problem.
-It mimics natural evolution by creating a population of children where some will grow up to adults,
-the fittest of which reproduce the most.
-The newly created offspring receives a genome derived from its parents,
-using a combination of genome crossover and random mutations to push the search forward.
-
-Good choices for genome representations and fitness functions make GAs excellent for finding solutions to optimisation problems.
-Good hyperparameters (parameters for the GA run itself, i.e. crossover rate, adult and child population sizes)
-have to be found for each separate problem domain due to the No Free Lunch Theorem.
 
 \subsubsection{Genotype and phenotype representation}
 
@@ -211,6 +202,7 @@ The hyperparameters for the GA are presented in table \ref{table:ga-hyperparamet
 \begin{table}
   \centering
   \caption{GA hyperparameters}
+  \label{table:ga-hyperparameters}
   \begin{tabular}{ll}
     Children pool size             & 40                                    \\
     Adult pool size                & 40                                    \\
@@ -221,7 +213,6 @@ The hyperparameters for the GA are presented in table \ref{table:ga-hyperparamet
     Genome crossover               & Per component crossover (p=0.5)       \\
     Genome mutation                & Per genome component mutation (p=0.1) \\
   \end{tabular}
-  \label{table:ga-hyperparameters}
 \end{table}
 
 Adult selection is simple generational mixing,
@@ -229,6 +220,4 @@ selecting the best 40 specimens from the combined children and adult populations
 Per component crossover will with a probability p either pass through the entire genome from the left parent,
 or for each component chose either the left or right parents value with a probability 0.5.
 Per genome component mutation will reroll each genome component with probability p.
-This value is set relatively high (0.1) due to experiments showing a much faster convergence rate than with the initial chosen value of 0.01.
-
-The temporal parity task will be used for evaluating the evolved RBNs with parameters as set in table \ref{table:dataset-parameters}.
+This value is set relatively high (0.1) due to experiments showing a much faster convergence rate fr this domain than with the initial chosen value of 0.01.
