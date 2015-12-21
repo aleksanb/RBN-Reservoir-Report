@@ -1,14 +1,47 @@
 \section{Experiments}
 
-\subsection{Reproducing previous experiments}
+\subsection{Reproduce previous results}
+
+In \cite{rbn-reservoir} the authors find a relationship between computational capability and performance,
+that certain values of $L$ give the best reservoir performance,
+and that RBNs with connectivity $\langle K \rangle =2$ should outperform other connectivities.
+To test these assertions,
+we must create and benchmark a number of functioning RBN reservoir systems,
+noting their accuracy on the chosen task as well as their computational capability.
+
+We will be using two versions of the \textit{temporal parity} task
+(as specified in table \ref{table:task-parameters}) to measure reservoir performance.
+The temporal parity task is chosen over temporal density as it is the more difficult task
+(shown in \cite{rbn-reservoir}), presumably resulting in more interesting and rich resevoirs.
+
+\begin{table}
+  \centering
+  \caption{Task parameters}
+  \label{table:task-parameters}
+  \begin{tabular}{ll}
+    Task type         & Temporal Parity \\
+    Num. datasets     & 10              \\
+    Dataset length    & 200             \\
+    $N$ (window size) & 3 and 5         \\
+    $t$ (offset)      & 0               \\
+  \end{tabular}
+\end{table}
+
+
+As the number of different RBNs is oppressively large,
+$(\frac{2^{2^{K}}N!}{(N-K)!})^N$ \cite{gershenson2004introduction},
+we therefore create 30 random specimens for each combination of the RBN parameters displayed in table \ref{table:rbn-combinations}.
+
+\begin{table}
+  \centering
+  \caption{RBN combinations}
+  \label{table:rbn-combinations}
+  \begin{tabular}{ll}
+    N (nodes)              & 100             \\
+    K (connectivity)       & 1, 2, 3         \\
+    L (input connectivity) & 0, 10, ..., 100 \\
+    Temporal parity        & $N=3,5$ \\
+  \end{tabular}
+\end{table}
 
 \subsection{Evolving reservoirs to re-use existing readout layers}
-
-\todo[inline]{Yah this should probably be put somewhere else?}
-
-It seems that for a random sample of reservoirs of a given size and connetivity,
-the temporal density task is solveable for a larger $ n $ than the temporal parity one.
-The parity task might therefore requires a more specialized network topology to function well.
-Due to the seemingly increased complexity of separating the temporal parity task at low $ n $,
-it was chosen as the main task in this paper.
-
