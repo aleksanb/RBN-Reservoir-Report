@@ -6,7 +6,7 @@
       \input{results/figures/distribution-100-3-1.tex}
     }
     \subfloat{
-      \input{results/figures/distribution-100-3.tex}
+      \input{results/figures/distribution-100-3-2.tex}
     }
     \subfloat{
       \input{results/figures/distribution-100-3-3.tex}
@@ -18,7 +18,7 @@
       \myscatterplot{results/figures/computational-power-100-3-1.dat}
     }
     \subfloat{
-      \myscatterplot{results/figures/computational-power-100-3.dat}
+      \myscatterplot{results/figures/computational-power-100-3-2.dat}
     }
     \subfloat{
       \myscatterplot{results/figures/computational-power-100-3-3.dat}
@@ -33,14 +33,40 @@
       \input{results/figures/distribution-100-5-1.tex}
     }
     \subfloat{
-      \input{results/figures/distribution-100-5.tex}
+      \input{results/figures/distribution-100-5-2.tex}
     }
     \subfloat{
       \input{results/figures/distribution-100-5-3.tex}
     }
   }
-  \caption{Here we plot the fitness against connectivity for K=[1,2,3] with temporal 100 5. We can see this is much more difficile tha le before. This difference is kinda weird as K=2 should perform better, but that considers a heterogenous reservoir, while we use the homogenous one. There might also be unaccounted differences in reservoir size that affect this LOL w8 this is consistent after all just read their plots correctly.}
+
+  %\resizebox{\textwidth}{!}{
+  %  \subfloat{
+  %    \myscatterplot{results/figures/computational-power-100-5-1.dat}
+  %  }
+  %  \subfloat{
+  %    \myscatterplot{results/figures/computational-power-100-5-2.dat}
+  %  }
+  %  \subfloat{
+  %    \myscatterplot{results/figures/computational-power-100-5-3.dat}
+  %  }
+  %}
+  \caption{Figures a-c show the average performance with K=[1,2,3] for temporal 100 3. We see that 1 sucks a bit compared to 2 and 3, although 2 and 3 both work.}
 \end{figure*}
+%\begin{figure*}[!t]
+%  \resizebox{\textwidth}{!}{
+%    \subfloat{
+%      \input{results/figures/distribution-100-5-1.tex}
+%    }
+%    \subfloat{
+%      \input{results/figures/distribution-100-5.tex}
+%    }
+%    \subfloat{
+%      \input{results/figures/distribution-100-5-3.tex}
+%    }
+%  }
+%  \caption{Here we plot the fitness against connectivity for K=[1,2,3] with temporal 100 5. We can see this is much more difficile tha le before. This difference is kinda weird as K=2 should perform better, but that considers a heterogenous reservoir, while we use the homogenous one. There might also be unaccounted differences in reservoir size that affect this LOL w8 this is consistent after all just read their plots correctly.}
+%\end{figure*}
 
 %\begin{figure*}[!t]
 %  \resizebox{\textwidth}{!}{
@@ -85,6 +111,120 @@ There seems to be extremely many usable reservoirs, at least for K=2.
 \end{itemize}
 
 \subsection{Evolving new RBN-Reservoirs to use existing readout layers}
+
+Three different Readout layers were created and stored for evolving new readout layers.
+For each readout layer, we run the evolutionary algorithm 30 times.
+
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}
+      [
+        xmin=0, xmax=220,
+        xlabel=GA Termination generation,
+        ytick={1,2,3,4,5},
+        yticklabels={
+          {L50 \#1},
+          {L50 \#2},
+          {L50 \#3},
+          {L70 \#1},
+          {L70 \#2}
+        },
+        yticklabel style={align=center},
+      ]
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-1-generations.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-2-generations.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-3-generations.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-1-generations.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-2-generations.dat};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Termination generations for the evolution of equvivalent RBNs.
+           GA hyperparameters as in table \ref{table:ga-hyperparameters}.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}
+      [
+        xmin=30, xmax=70,
+        axis x discontinuity=crunch,
+        xlabel=Evolved RBN connectivity,
+        ytick={1,2,3,4,5},
+        yticklabels={
+          {L50 \#1},
+          {L50 \#2},
+          {L50 \#3},
+          {L70 \#1},
+          {L70 \#2}
+        },
+        yticklabel style={align=center},
+      ]
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-1-connectivity.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-2-connectivity.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-3-connectivity.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-1-connectivity.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-2-connectivity.dat};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Connectivity for evolved RBNS. Extremely similar to the original connectivity of 50!}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}
+      [
+        xlabel=Evolved RBN computational capability,
+        ytick={1,2,3,4,5},
+        yticklabels={
+          {L50 \#1},
+          {L50 \#2},
+          {L50 \#3},
+          {L70 \#1},
+          {L70 \#2}
+        },
+        yticklabel style={align=center},
+        x tick label style={/pgf/number format/fixed},
+      ]
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-1-computational-power.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-2-computational-power.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/final-3-computational-power.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-1-computational-power.dat};
+
+      \addplot+[boxplot]
+      table[y index=0] {results/figures/N100K2L70-2-computational-power.dat};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Computational complexity for evolved RBNs}
+\end{figure}
 
 For some readout layers (4 or so), check if there are multiple acceptable reservoirs for each readout layer.
 
