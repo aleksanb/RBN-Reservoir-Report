@@ -1,38 +1,35 @@
 \section{Method}
 
-We wish to verify the viability of RRC systems.
-This requres us to be able to reproduce at least some previously published results.
-Therefore, we will create a functioning RRC system, as in \cite{rbn-reservoir},
-and test it on the datasets presented in the same paper.
-We will also re-use the computational capability measure introduced there,
-and see if the relationship between it and accuracy can be recreated.
+To verify the viability of RBNs in RC systems, a functioning RRC system has to be created.
+Being able to reproduce results from \cite{rbn-reservoir} will lend credibility to the approach presented in this paper.
+The Computational Capability measure presented therein will be used to analyze our RRC systems.
 
-Secondly, we wish to test the effectiveness of creating new RBN rervoirs for existing readout layers through artificial evolution.
-If this is found to be the case, it would imply a many-to-one correspondence between RBN-reservoirs and readout layers.
-These sets of re-useable  reservoirs must necessarily have some similar characteristics,
-to allow our re-use of the readout layer to make sense.
-We will attempt to find any similarities there might be.
-In addition, such a finding can shed light on the optimal genome representation to use for evolving RBN reservoirs.
+Second, we wish to investigate the potential many-to-many relationship betwen readout layers and reservoirs,
+evolving these functionally equivalent reservoirs through artificial evolution.
+These sets of interchangeable reservoirs may share similar attributes and Computational Capability,
+and will be analyzed.
+If such a mapping exists it may tell us something about how large a part of the RBN fitness landscape is usable as a reservoir, and how difficult it is to reach these points.
+A smaller generative genome could then be used instead of the fixed one presented in this paper,
+potentially guided towards the attributes we find useful.
 
-The following systems have been implemented to investigate the stated questions.
-
+The following systems have been implemented to investigate the stated questions:
 \begin{itemize}
   \item An RBN simulator
   \item Procedures for analyzing and visualizing RBNs
   \item Procedures for creating classification tasks
 
-  \item An RBN-Reservoir Computing system using:
+  \item An RBN Reservoir Computing system using:
   \begin{itemize}
-    \item The forementioned RBN simulator as a reservoir
+    \item The aforementioned RBN simulator as a reservoir
     \item The ridge regression node from the Oger RC toolkit \cite{verstraeten2012oger} as readout layer
-    \item The Python Modular toolkit for Data Processing \cite{zito2008modular} for glue and training of the RRC system.
+    \item The Python Modular Toolkit for Data Processing \cite{zito2008modular} for glue and training of the RRC system.
   \end{itemize}
   \item A system for evolving RBNs given certain constraints, using a genetic algorithm based on the one used in \cite{farstad2015evolving}.
 \end{itemize}
 
 The codebase is available on GitHub \cite{forprosjekt-code-github} under a soon-to-be permissive licence.
 
-\subsection{Measuring computational capability}
+\subsection{Measuring Computational Capability}
 
 We will be using the computational complexity measure introduced in \ref{section:computational-capability} to analyze the created RBNs.
 This measure is parameterized over both input stream length $T$ and the required depth of separation $t$.
@@ -41,8 +38,8 @@ we will chose values of $T$ similar to the length and $t$ equal to the required 
 
 \subsection{The creation and training of a functioning RRC system}
 
-The final RRC system is shown as a block diagram in \ref{figure:rrc-block},
-and the actual network topology is equivalent as the one in figure \ref{figure:rbn-reservoir}.
+The final RRC system is shown as a block diagram in Figure \ref{figure:rrc-block},
+and the actual network topology is equivalent to the one in Figure \ref{figure:rbn-reservoir}.
 
 \begin{figure}
   \centering
@@ -68,9 +65,9 @@ and the actual network topology is equivalent as the one in figure \ref{figure:r
 
 To verify that RBN simulation is working,
 a RBN is created randomly, initial state set to all zeros, and ran.
-The results are visualized in figure \ref{figure:rbn-noperturb}.
+The results are visualized in Figure \ref{figure:rbn-noperturb}.
 We see that the RBN exhibits stable dynamics, and enters into an attractor around $t=15$.
-In figure \ref{figure:rbn-perturb} we continiously perturb the RBN with the input stream from the Temporal Parity task visualized in \ref{figure:temporal-parity}.
+In Figure \ref{figure:rbn-perturb} we continiously perturb the RBN with the input stream from the Temporal Parity task visualized in Figure \ref{figure:temporal-parity}.
 In the perturbed case, the state trajectory is continiously changed, preventing the RBN from settling into an attractor.
 Interestingly enough, there seems to be a visual similarity between the two cases.
 Such a pattern is sure to dissapear with a RBN in the chaotic phase.
@@ -94,18 +91,14 @@ which is then tasked with finding a linear combination of the RBN states that re
   }
 \end{figure}
 
-\subsubsection{training}
+\subsubsection{Training}
 
-The training process for a RRC system is threefold.
-
-First, we create a number of datasets for training,
-as well as a dataset for later testing.
-These datasets are either Temporal Parity or Density,
-as described in section \ref{subsection:rbn-reservoir-systems}.
+To train the RRC system we require a number of training datasets,
+as well as different testing datasets to test the trained system.
+We will use the datasets described in section \ref{subsection:rbn-reservoir-systems}.
 
 We then either create a new RBN (initialize it randomly),
 or load a previously created RBN from disk.
-
 For each bit of input in each dataset,
 we perturb the input-connected nodes in the RBN.
 After each perturbance, the RBN is ran synchronously (CRBN mode) for one timestep.
@@ -122,6 +115,7 @@ This process is repeated for all the datasets,
 and the final regression parameters are chosen as a combination of the parameters obtained for each individual dataset.
 Finally we measure the normalized accuracy of the trained reservoir on the test dataset,
 defined as
+\todo[inline]{Use symbols instead of words?}
 \begin{equation}
 Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_output)}
 \label{formula:accuracy}
@@ -133,9 +127,9 @@ it will be stored for further research.
 \subsection{The evolving of functionally equivalent RBN reservoirs for existing readout layers}
 \label{section:method:evolving-rbns}
 
-To investigate the potential many-to-one mapping between RBN-reservoirs and readout layers,
-we'll be using a genetic algorithm (as presented in section \ref{section:background:ga}) to evolve candidate RBNs,
-using a fixed test dataset and readout layer for fitness evaluation.
+To investigate the potential many-to-many mapping between RBN-reservoirs and readout layers,
+a Genetic Algorithm (section \ref{section:background:ga}) will be used.
+A fixed test dataset and readout layer for fitness evaluation will be used.
 
 \subsubsection{Genotype and phenotype representation}
 

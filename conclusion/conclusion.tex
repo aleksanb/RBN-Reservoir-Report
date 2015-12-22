@@ -28,3 +28,21 @@ Turns out you can evolve RBN-Reservoirs to use similar readout layers!
 Yay, this is cool as that indicates that there might be exploitable properties of material that can be used to figure out if something is good for computation, before having to use it for computations!
 
 More stuff here later i guess
+
+\todo[inline]{GOTTA FIX DIS FAST}
+\subsection{Dynamics and complexity of reservoirs}
+
+In general, one wishes to use a reservoir with a complexity matching that of the problem.
+Utilizing a modern processor to predict a very simple timeseries would be a classic case of shooting sparrows with cannons \cite{wiki:sparrow},
+while achieving the same using a RBN or CA might be more impressive.
+
+The computational power of a complex system is the highest when the system is on the edge of chaos \cite{langton3computation}.
+In \cite{rbn-reservoir}, the authors find that this also holds for RBN based reservoir systems.
+They also propose a metric for predicting the computational power of RBNs,
+which is found to correlate with actual performance,
+and will be used throughout this paper.
+One could also look at the attractor lengths and transient times of a RBN,
+attempting to uncover any insights that might be available there.
+The continious perturbance of the reservoir however lessens the importance of attractors,
+as the chance of settling into one is decreased.
+It will therefore not be used.

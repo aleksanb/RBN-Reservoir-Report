@@ -1,75 +1,23 @@
 \section{Introduction}
 
-Reservoir computing (RC) is a form of machine learning that sprung out from the study of recurrent neural networks (RNNs).
+Reservoir Computing (RC) is a form of machine learning that sprang out from the study of recurrent neural networks (RNNs).
 In short, it utilizes the dynamics of some complex system dubbed a 'reservoir' to preprocess a timeseries problem,
 transforming it from a temporal to a spacial one in the reservoir, making it then separable with a usually simple readout layer.
 
-In this paper we investigate the dynamics of Reservoir Computing systems where the reservoir is a Random Boolean Network (RBN) \cite{gershenson2004introduction},
-an approach found fruitful in \cite{rbn-reservoir}.
+In this paper the dynamics of Reservoir Computing systems where the reservoir is a Random Boolean Network (RBN) \cite{gershenson2004introduction} is investigated.
+In \cite{rbn-reservoir} RBN Reservoir Computing systems (RRC) were investigated,
+and found to be a fruitful approach.
 
-First we create a working RBN-reservoir computing system (RRC) in the Python programming language,
+First we create a working RBN Reservoir Computing system in the Python programming language,
 reproducing chosen experiments from \cite{rbn-reservoir}.
 These include finding the optimal input connectivity ($L$) and internal connectivity $K$,
 as well as testing their measure of Computational Capability against actual reservoir performance.
 
+\todo[inline]{Rewrite the following paragraphs}
+%\todo[inline]{Mention something about the many-to-one mapping of readout->reservoir leading to the possibility of using a generative genome here, or take that later?}
 Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was originally trained on,
 and still stay accurate on the original classification task.
 These functionally equivalent reservoirs, if any, will be evolved through the use of a genetic algorithm (GA).
 
-Finally we look at the dynamics and characteristics of these groups of RBN-Reservoirs,
+Finally we look at the dynamics and characteristics of these groups of RBN Reservoirs,
 attempting to find any similarities that made them exploitable for computation.
-
-%\todo[inline]{Mention something about the many-to-one mapping of readout->reservoir leading to the possibility of using a generative genome here, or take that later?}
-
-\subsection{A brief introduction to reservoir computing}
-
-Recurrent neural networks, as opposed to feed-forward neural networks,
-are notoriously time consuming and difficult to train.
-This due to feedback from the recurrent connections during the training process,
-allowing small topology changes to drastically change ones position in the fitness landscape.
-
-It was therefore proposed both in \cite{jaeger2002adaptive} (as echo state networks, or ESN)
-and \cite{natschlager2002liquid} (as liquid state machines, or LSM) to separate the RNN into two parts,
-the untrained reccurrent reservoir, and the trained readout layer.
-Both of these methods have been unified into the field of Reservoir Computing,
-now focusing on the separate training and evolution of the recurrent and readout part \cite{lukovsevivcius2012reservoir}.
-
-Useful RC resources include Organic \cite{organic}, an online RC hub,
-providing documentation, references, and a RC toolbox implemented in python.
-It has been quite useful for this project.
-Exiting applications of reservoir computing include speech and handwriting recognition,
-as well as controlling robotics \cite{lukovsevivcius2012reservoir}.
-
-\subsection{Alternatives to classical reservoirs}
-
-Are there other types of complex systems that can be used as reservoirs?
-What properties must these reservoirs have to be able to solve problems?
-
-Complex networks similar to the sparsely connected RNNs found in classical RC devices include Cellular Automata and Random Boolean Networks.
-Both are considerably less complex than RNNs, requiring only simple lookup tables for state transitions as opposed to multiplication for RNNs.
-A short treatise on Cellular Computing \& friends is available here \cite{sipper1999emergence}.
-Cellular computing provides a potentially powerful alternative to classical computers,
-leveraging extreme parallelism, simple components and local state.
-
-The ever-so-cited 'Water bucket' paper investigated the use of an actual bucket of water as a reservoir \cite{fernando2003pattern},
-successfully recognizing patterns and achieving decent performance at that.
-The RBN-reservoir \cite{rbn-reservoir} approach mentioned earlier, has also been found to be viable.
-
-\subsection{Dynamics and complexity of reservoirs}
-
-In general, one wishes to use a reservoir with a complexity matching that of the problem.
-Utilizing a modern processor to predict a very simple timeseries would be a classic case of shooting sparrows with cannons \cite{wiki:sparrow},
-while achieving the same using a RBN or CA might be more impressive.
-
-The computational power of a complex system is the highest when the system is on the edge of chaos \cite{langton3computation}.
-In \cite{rbn-reservoir}, the authors find that this also holds for RBN based reservoir systems.
-They also propose a metric for predicting the computational power of RBNs,
-which is found to correlate with actual performance,
-and will be used throughout this paper.
-One could also look at the attractor lengths and transient times of a RBN,
-attempting to uncover any insights that might be available there.
-The continious perturbance of the reservoir however lessens the importance of attractors,
-as the chance of settling into one is decreased.
-It will therefore not be used.
-The chosen metrics can be used to categorize the computational power of other reservoirs,
-even physical materials \cite{miller2002evolution}.

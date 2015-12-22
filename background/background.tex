@@ -1,23 +1,70 @@
 \section{Background}
 
-\subsection{A brief introduction to boolean networks}
+\subsection{A Brief Introduction to Reservoir Computing}
 
-Random Boolean Networks, also known as Kaffman networks, were originally developed as a model of genetic regulatory networks \cite{kauffman1969metabolic}.
-The model makes no assumptions about the actual functioning of the nodes in the network,
-making them useful to model a wide range of phenomena.
+Recurrent Neural Networks, as opposed to feed-forward neural networks,
+are notoriously time consuming and difficult to train.
+\todo[inline]{What is RNN and FFNs?}
+This is due to feedback from the recurrent connections during the training process,
+allowing small topology changes to drastically change a network's position in the fitness landscape.
+
+It was therefore proposed both in \cite{jaeger2002adaptive} (as Echo State Networks, or ESN)
+and \cite{natschlager2002liquid} (as Liquid State Machines, or LSM) to separate the RNN into two parts,
+the untrained reccurrent reservoir, and the trained readout layer.
+\todo[inline]{Add image of this thingy here somewhere}
+Both of these methods have been unified into the field of Reservoir Computing,
+now focusing on the separate training and evolution of the recurrent and readout parts \cite{lukovsevivcius2012reservoir}.
+
+Exiting applications of Reservoir Computing include speech and handwriting recognition,
+as well as controlling robotics \cite{lukovsevivcius2012reservoir}.
+
+\subsection{Alternatives to classical reservoirs}
+
+Are there other types of complex systems that can be used as reservoirs?
+What properties must these reservoirs have to be able to solve problems?
+
+Complex networks similar to the sparsely connected RNNs used  ESN and LSM systems include Cellular Automata and Random Boolean Networks.
+
+Cellular Automata are regular grids of cells containing some state,
+each cell connected to its neighbors in the grid.
+Cells then update in lockstep according to some shared transition table,
+creating a new generation.
+RBNs can be seen upon as an abstraction over CAs again,
+allowing for nonlocal neighbors, and will be introduced in depth in \ref{section:rbns}.
+
+Both models are simple, and can be implemented in software,
+hardware (FPGAs), and in materio \cite{miller2002evolution}
+(for evolving CAs in materio, see \cite{farstad2015evolving}).
+This computational paradigm is known as Cellular Computing,
+and provides a potentially powerful alternative to classical computers,
+leveraging extreme parallelism, simple components and local state \cite{sipper1999emergence}.
+
+The 'Water bucket' paper investigated the use of an actual bucket of water as a reservoir \cite{fernando2003pattern},
+successfully recognizing patterns and achieving decent performance at that.
+The RBN Reservoir approach has also been found to be viable \cite{rbn-reservoir} .
+
+\subsection{A Brief Introduction to Boolean Networks}
+\label{section:rbns}
+
+Random Boolean Networks, also known as Kaffman networks,
+were originally developed as a model of gene regulatory networks \cite{kauffman1969metabolic},
+the complex system that regulates how genes in multicellular organisms interact with each other.
+The model requires no assumptions about the inner workings of the actual nodes,
+which allows it to model phenomena where the exact internal workings of the system may be unknown.
+
 The simplification of a system to a boolean model doesn't pose a problem,
 as any multi-valued network can be transformed to a corresponding binary one.
 
 A RBN is usually described by its number of nodes $N$ and the in-degree $K$ of the nodes,
 that is, how many nodes each node depends on (also known as its ancestors).
 RBNs can have both homogenous and heterogenous in-degrees.
-In heterogenous networks, one usually describes the average connectivity $<K>$ instead.
+In heterogenous networks, one usually describes the average connectivity $\langle K \rangle$ instead.
 
 Each node can have a state of zero or one.
 The next state of the node is solely determined by the current combination of states of its ancestors.
 Each combination leads to a new state of zero or one,
-with the probability given by a binomial distribution usually having $<p>=0.5$.
-Figure \ref{figure:sample-homogenous-rbn} visualizes a homogenous RBN with N=3 K=2, and P=0.5.
+with the probability given by a binomial distribution usually having $\langle P \rangle = 0.5$.
+Figure \ref{figure:sample-homogenous-rbn} visualizes a homogenous RBN with $N=3, K=2, P=0.5$.
 
 \begin{figure}
   \centering
@@ -47,26 +94,27 @@ Figure \ref{figure:sample-homogenous-rbn} visualizes a homogenous RBN with N=3 K
       1 & 1 & 1 \\
     \end{tabular}
   }
-  \caption{An example homogenous RBN with N=3, K=2.}
+  \caption{An example homogenous RBN with $N=3, K=2, P=0.5$.}
   \label{figure:sample-homogenous-rbn}
 \end{figure}
 
-In the classical RBN model (CRBN), all nodes update at the same time,
-therefore the states of the network at $t+1$ only depends on the states at $t$.
-This is a simplification that isn't quite accurate for all systems,
-notably gene regulation networks where the system doesn't operate in lockstep.
-There are therefore a number of updating schemes on the spectrum of determinism and randomness.
+In the simplest RBN updating scheme, all nodes update in lockstep.
+This is known as the Classical RBN updating scheme (CRBN).
+The states of the RBN at the next timestep $t+1$ therefore only depend on the states at the previous timestep $t$.
+A criticism of the classical model is that gene regulation networks are updating continiously,
+as opposed to in lockstep.c
+There are therefore a number of alternate updating schemes which can be categorized by whether they are deterministic or nondeterministic, as well as synchronous and asynchronous.
 
 The dynamics of an RBN can be categorized as being in either the ordered, critical, or chaotic phase.
 These phases can be identified by how large a part of the network state is able to change over time,
 whether similar states tend to converge or diverge over time,
 and the networks resistance to perturbations (outside changes to the network).
 
-As these phases are easy to identify visually,
-we will plot the states of the RBN in a square lattice,
+One way to obtain these phases analytically is by comparing the resulting states of two identical RBNs where one is subject to some perturbation \cite{gershenson2004introduction}.
+For visual identification, we plot the states of the RBN in a square lattice,
 with the network states plotted horizontally, and time flowing downwards.
 A node is drawn as white if its state is one, black otherwise.
-The phases are visualized in figure \ref{figure:rbn-phases}.
+The phases are visualized in Figure \ref{figure:rbn-phases}.
 
 \begin{figure}
   \subfloat[Ordered phase, K=1]{
@@ -84,27 +132,31 @@ The phases are visualized in figure \ref{figure:rbn-phases}.
 
   \caption{
     Trajectories through state-space for RBNs with $N=30, K=[1,2,3]$, visualizing the different phases.
+    Time flows downwards the lattice, while RBN states are shown along the X-axis.
+    with the network states plotted horizontally, and time flowing downwards.
     Images created with the developed RBN-simulator.
   }
   \label{figure:rbn-phases}
 \end{figure}
 
 In general, RBNs in the critical phase are the most interesting.
-These are seemingly able to support both information transmission, storage and modification,
-capacities required for computation \cite{langton3computation}.
-Critical systems are found on the edge of chaos, on the phase transition between ordered and chaotic networks.
-For classical RBNs with $<p>=0.5$, critical networks are usually found at $<K>=2$ \cite{gershenson2004introduction},
-although one could still create networks with similar dynamics for different $K$.
+These are seemingly able to support information transmission, storage and modification,
+all capacities required for computation \cite{langton3computation}.
+Critical systems are found on the edge of chaos,
+on the phase transition between ordered and chaotic networks \cite{gershenson2004introduction}.
+For RBNs with $\langle p \rangle = 0.5$,
+critical dynamics are usually found at $\langle K \rangle = 2$ \cite{gershenson2004introduction},
+although one could still find networks with such dynamics for different values of $\langle K \rangle$.
 
 A thorough introduction to the field of RBNs is available in \cite{gershenson2004introduction}.
 
-\subsection{RBN-Reservoir systems}
+\subsection{RBN Reservoir systems}
 \label{subsection:rbn-reservoir-systems}
 
 How does one adapt a RBN for use as a reservoir in a RBN-RC device?
 RBNs aren't usually designed to take external input.
 We do however, have the concept of perturbation,
-the external flipping of bits in the networks state,
+the external flipping of bits in the network's state,
 transition tables or edges.
 This can be utilized to create RBNs that take input,
 by continiously perturbing the RBN nodes by the bits of the input sequence.
@@ -120,7 +172,7 @@ These RBN-RC systems have heterogenous connectivity,
 consume one bit of input at each timestep ($I=1$),
 perturbing $L$ of the $N$ nodes in the process.
 The readout layer can be any node performing some kind of regression of the reservoir state against expected outout for the current task, e.g. linear regression.
-Such a setup is shown in figure \ref{figure:rbn-reservoir}.
+Such a setup is shown in Figure \ref{figure:rbn-reservoir}.
 
 \begin{figure}
   \centering
@@ -135,12 +187,13 @@ Such a setup is shown in figure \ref{figure:rbn-reservoir}.
 \subsubsection{Tasks}
 \label{section:tasks}
 
-To measure the real-life performance and accuracy of the RBN-reservoir systems, two tasks were introduced: Temporal Density and Temporal Parity \cite{rbn-reservoir}.
+To measure the real-life performance and accuracy of the RBN Reservoir systems,
+two tasks were introduced: Temporal Density and Temporal Parity \cite{rbn-reservoir}.
 Both require the reservoir to be able to retain information for a sliding window of size $ n $,
 offset by some value $ t $, back through the input stream.
-The temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
-the temporal density task to determine whether there were a majority of ones.
-The former is visualized in figure \ref{figure:temporal-parity},
+The Temporal Parity task requires us to determine if there were an odd number of ones in the sliding window,
+the Temporal Density task to determine whether there were a majority of ones.
+The Former is visualized in figure \ref{figure:temporal-parity},
 and will be used to benchmark the reservoirs created later in this paper.
 
 \begin{figure}
@@ -162,11 +215,12 @@ and will be used to benchmark the reservoirs created later in this paper.
 
 \subsubsection{Computational capability}
 \label{section:computational-capability}
-For an RBN-reservoir to perform well in computational tasks,
-it must be able to both forget past perturbations and separate input streams that have started converging.
+For an RBN-reservoir to perform well at computational tasks,
+it must be able to both forget past perturbations and keep two input streams that have begun converging separated \cite{bertschinger2004real}.
 
-These two properties are coined \textit{fading memory} and \textit{separation property} \cite{rbn-reservoir},
-and can be measured as follows.
+These two properties are coined \textit{fading memory} and \textit{separation property},
+and can be measured \cite{rbn-reservoir} as follows.
+
 Create two equal input streams \#1 and \#2 of length $T$.
 If measuring \textit{fading memory}, flip the first bit in stream \#2.
 If measuring \textit{separation property}, flip all bits up to bit $T-t$ in stream \#2
@@ -179,9 +233,8 @@ The computational capability $\Delta$ of an RBN-reservoir is then defined as
   \Delta_{Tt} = separation\_property_{Tt} - fading\_memory_{T}
 \label{formula:accuracy}
 \end{equation}
-
 Analyzing different RBN-reservoirs with this metric \cite{rbn-reservoir},
-a high $\Delta$ is found to correlate with critical connectivity ($<K>=2$).
+a high $\Delta$ is found to correlate with critical connectivity ($\langle K \rangle = 2$).
 For all RBN-reservoirs, $\Delta$ drops when increasing the required separation $t$,
 and is maximized when one doesn't have to remember anything at all ($t=0$).
 
@@ -207,5 +260,6 @@ The newly created offspring receives a genome derived from its parents,
 using a combination of genome crossover and random mutations to push the search forward.
 
 Good choices for genome representations and fitness functions make GAs excellent for finding solutions to optimisation problems.
-Good hyperparameters (parameters for the GA run itself, i.e. genome crossover rate, adult and child population sizes)
-have to be found for each separate problem domain due to the No Free Lunch Theorem.
+Good hyperparameters (parameters for the GA run itself, i.e. genome crossover rate, adult and child population sizes) may differ widely across problem domains and genome representations.
+If an certain GA instantiation performs well in some domain,
+it must necessarily perform worse on others as proven by the No Free Lunch Theorem \cite{wolpert1997no}.
