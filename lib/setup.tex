@@ -72,6 +72,30 @@
   \end{tikzpicture}
 }
 
+\newcommand{\mysecondboxplot}[1]{
+  \begin{tikzpicture}
+    \pgfplotsset{
+      boxplot/every box/.style={fill=gray},
+      boxplot/every whisker/.style={fill=black, color=black},
+      boxplot/box extend=0.7
+    }
+    \begin{axis}
+      [
+        axis x line=bottom,
+        axis y line=left,
+        ymin=0.4,
+        ymax=1.05,
+        axis y discontinuity=crunch,
+        xtick scale label code/.code={},
+        boxplot/draw direction=y,
+        xlabel=GA Generation,
+        ylabel=Fitness
+      ]
+      #1
+    \end{axis}
+  \end{tikzpicture}
+}
+
 \newcommand{\myscatterplot}[1]{
   \begin{tikzpicture}
     \begin{axis}

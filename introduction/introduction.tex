@@ -7,14 +7,15 @@ transforming it from a temporal to a spacial one in the reservoir, making it the
 In this paper the dynamics of Reservoir Computing systems where the reservoir is a Random Boolean Network (RBN) \cite{gershenson2004introduction} is investigated.
 In \cite{rbn-reservoir} RBN Reservoir Computing systems (RRC) were investigated,
 and found to be a fruitful approach.
+A computational system consisting of such simple nodes with inherent emergent properties
+are an interesting field of study as an alternative to classical computation.
+The study of such networks can also pave the way for selecting physical substrates as reservoirs.
 
 First we create a working RBN Reservoir Computing system in the Python programming language,
 reproducing chosen experiments from \cite{rbn-reservoir}.
 These include finding the optimal input connectivity ($L$) and internal connectivity $K$,
 as well as testing their measure of Computational Capability against actual reservoir performance.
 
-\todo[inline]{Rewrite the following paragraphs}
-%\todo[inline]{Mention something about the many-to-one mapping of readout->reservoir leading to the possibility of using a generative genome here, or take that later?}
 Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was originally trained on,
 and still stay accurate on the original classification task.
 These functionally equivalent reservoirs, if any, will be evolved through the use of a genetic algorithm (GA).

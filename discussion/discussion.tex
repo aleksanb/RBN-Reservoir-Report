@@ -12,7 +12,7 @@ the more it has to be perturbed to retain the input information.
 \subsubsection{Temporal Parity with $N=5$}
 The distribution of well-performing reservoirs is shifted heavily towards $K=3$.
 There are single outliers that perform well for $K=2$,
-but the accuracy means are considerably lower than for the reservoirs with $K=3$.
+but the accuracy medians are considerably lower than for the reservoirs with $K=3$.
 
 Comparing the observed performance against the performace of the RRC systems benchmarked in \cite{rbn-reservoir} on the same task,
 one sees the same drop in performance from Temporal Parity with $N=3$ to $N=5$.
@@ -36,8 +36,26 @@ while keeping the average connectivity the same.
 This disparity can therefore be explained by the fact that an homogenous RBN with $K=3$ can emulate an RBN with lower connectivity by having two or more in-edges from the same ancestor node,
 while an homogenous RBN with $K=2$ cannot emulate a higher-connectivity one.
 
-
 \subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
 
-Talk about Genome representation, inefficient, better with binary string?
-Luckily dominated by RBN-Reservoir simulation time
+There are a great number of functionally equivalent reservoirs for each functioning readout layer,
+and the Genetic Algorithm finds them efficiently.
+Sadly, a tight correlation between the properties of the RBN from the original RRC system,
+and RBNs evolved against its readout layer seem spurious at best.
+In fact, the connectivity distributions of Figure \ref{figure:evolved-connectivity} and computational capabilities of Figure \ref{figure:evolved-ccs} seem much more representative of the general RBN population, as shown in Figure \ref{fig:res:d-100-3-2}.
+This indicates that while there are many compatible reservoirs for a given readout layer,
+the distribution of the reservoirs are likely the same as the distribution of reservoirs with the same connectivity in general.
+
+It should be noted that during earlier simulations with a per-component mutation rate of $1\%$ as opposed to the $10\%$ actually used,
+the mean of the fitness distribution during GA runs would be much closer to the best specimens,
+but would frequently get stuck in a local maxima with fitness around 0.77, eventually timing out.
+This suggests that a lack of genetic variety was the culprit,
+as it's limited what genome crossover can accomplish alone.
+Increasing the rate to $10\%$ drastically increased convergence rates (as shown in Figure \ref{figure:termination-generations},
+even though the population median stays close to 0.5 for the entire run.
+
+Finally, this implies a one-to-many mapping between reservoirs and readout layers,
+as there are multiple compatible reservoirs for each previously trained readout layer.
+This makes the potential use of a smaller generative genome for evolving RRC systems interesting.
+Even though it hits fewer points in the RBN fitness landscape than the fixed genome used in this paper,
+a large amount of these points are still usable for each instance of a working readout layer.

@@ -1,26 +1,33 @@
 \section{Future work}
 
-\todo[inline]{To be finished}
+\subsection{Required Complexity of Tasks}
 
-\subsection{How complex do the reservoirs actually have to be?}
+Only RBN Reservoirs of size $N=100$ are looked at in this paper,
+and in \cite{rbn-reservoir} reservoirs of size $N=500$ are used.
+Neither might be the optimal size for an RBN,
+with the best dynamics and problem accuracies potentially obtained at different reservoir sizes.
+If it turns out that a given task can be solved just as easily for a reservoir of size $N=50$ as $N=500$ one might as well use the smaller reservoir,
+saving bits, hardware, and the environment in one go.
+If one can obtain the relationship betwen how complex a reservoir has to be to solve a given task,
+one could predict i.e. how large the water bucket reservoir presented in \cite{fernando2003pattern} actually has to be.
 
-Can they be really small, and still adequately do the task?
-The time was not there to research this for this preliminary project.
+\subsection{Generative genomes}
 
-\subsection{Using generative genomes}
+A fixed-representation genome was used in this paper to evolve functionally equivalent reservoirs,
+with the fitness function requiring the reservoirs to adapt to a given readout layer.
+Alternatively one could evolve RBNs towards the dynamics known to be useful for computation.
+This can be done with a generative genome, where the genome defines how the graph grows to its adult form,
+as opposed to describing the edges and nodes of the adult RBN directly.
 
-Fixed-representation genomes of graphs are hella space-inefficient.
-A generative genome would instead represent the growing of the graph,
-but would be able to 'hit' fewer targets in adult state-space.
-Therefore, the finding that there are multiple acceptable RBN-Reservoirs per readout layer
-comforts us that a generative genome could also be efficient.
+\subsection{Scaling up Simulation}
 
-\subsection{Scaling up simulation}
-
-RBN-simulation in python is hella slow.
-FPGA / supercomputers instead?
+Software simulations of RBNs and the training of the corresponding RRC systems can be rather slow.
+Therefore it might be more efficient to implement the RRC system in an FPGA,
+or as an accellerated task on a supercomputer or graphics card.
 
 \section{Conclusion}
+
+
 
 \todo[inline]{To be finished}
 

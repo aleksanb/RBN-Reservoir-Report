@@ -121,18 +121,10 @@ The CC plot (fig. \ref{fig:res:c-100-5-3}) contains considerable more samples wi
 
 \subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
 
-Talk about how there were many functionally equivalent RBN reservoirs,
-talk about average max fitness of the final generations for each thingy.
-
-%Having evolved 30 new reservoirs for each of the 5 readout layers presented in
-%section \ref{section:experiments:evolving},
-
-The input connectivity of the evolved reservoirs is shown in figure \ref{figure:evolved_connectivity}.
-The input connectivity seems to be largely independent of the original reservoir input connectivity,
-the population mean slightly above 50 for all groups of evolved reservoirs.
-
-Talk about the RBN computational complexity
-\todo[inline]{I should show the original RN complexity on the graph as well, so we know what to compare against}
+Out of the total $30\cdot5 = 150$ evolved RBNs,
+all except five achieved an accuracy of at least $99\%$.
+In Figure \ref{figure:termination-generations} we see plots of the 30 termination generations for each of the five readout layers.
+The worst accuracy of $78\%$  was achieved in the GA run of L50\#3 which timed out at generation 200.
 
 \begin{figure}
   \centering
@@ -140,8 +132,8 @@ Talk about the RBN computational complexity
     \begin{axis}
       [
         xmin=0, xmax=220,
-        xlabel=GA Termination generation,
-        ylabel=Original RBN,
+        xlabel=GA Termination generations,
+        %ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
           {L50\#1},
@@ -168,9 +160,32 @@ Talk about the RBN computational complexity
       table[y index=0] {results/figures/N100K2L70-2-generations.dat};
     \end{axis}
   \end{tikzpicture}
-  \caption{Termination generations for the evolution of equvivalent RBNs.
-           GA hyperparameters as in table \ref{table:ga-hyperparameters}.}
+  \caption{
+    Termination generations for the evolution of functionally equvivalent RBNs.
+  }
+  \label{figure:termination-generations}
 \end{figure}
+
+The fitness plots for one of the GA runs of L50\#3 is shown in Figure \ref{figure:fitness-generations}.
+This kind of fitness distribution,
+where the third quantile peaks at roughly $70\%$ accuracy with the best individual being found not gradually, but with a sudden jump, is representative for most of the GA runs performed.
+
+\begin{figure}
+  \centering
+  \input{results/figures/evolution-generations.tex}
+  \caption{
+    Fitness of the GA population at each generation.
+    The mean stays relatively close to $50\%$ accuracy the whole time,
+    althoug the third quartile pushes upwards towards the end.
+    Due to only storing max fitness and fitness quartiles during simulation,
+    the whiskers represent the best fitness as opposed to the 98th percentile.
+    }
+  \label{figure:fitness-generations}
+\end{figure}
+
+The input connectivity of the evolved reservoirs is shown in figure \ref{figure:evolved-connectivity}.
+Observe that the median of the distributions seem largely independent of the input connectivity of the original reservoir,
+the majority of its functionally equivalent RBNs centered around $L=50$.
 
 \begin{figure}
   \centering
@@ -180,7 +195,7 @@ Talk about the RBN computational complexity
         xmin=30, xmax=70,
         axis x discontinuity=crunch,
         xlabel=Evolved RBN input connectivity,
-        ylabel=Original RBN,
+        %ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
           {L50\#1},
@@ -209,10 +224,21 @@ Talk about the RBN computational complexity
   \end{tikzpicture}
   \caption{
     Connectivity for evolved RBNS.
-    Observe that the connectivity distribution of the evolved RBNs is heavily skewed towards 50, regardless of the input connectivity of the original RBN.
+    Observe that the connectivity distribution of the evolved RBNs is centered heaviliy around 50 regardless of the original input connectivity.
   }
   \label{figure:evolved-connectivity}
 \end{figure}
+
+Last we look at the computational capabilities of the evolved RBNs against the CC of the original reservoirs in figure \ref{figure:evolved-ccs}.
+There does not seem to be a strong relationship betwen the original CC values and the evolved ones.
+The distribution of L70\#2 is shifted towards 0.0,
+but the distribution of L70\#1 is not,
+even though its value is close to zero as well.
+
+If one looks at the CC-Accuracy plots of Figure \ref{fig:res:c-100-3-2},
+these distributions don't look that out of place.
+They might simply be a representation of where most reservoirs with
+$N=100, K=2, L=\langle 50 \rangle$ lie.
 
 \begin{figure}
   \centering
@@ -220,16 +246,15 @@ Talk about the RBN computational complexity
     \begin{axis}
       [
         xlabel=Evolved RBN computational capability,
-        ylabel=Original RBN,
         ytick={1,2,3,4,5},
         yticklabels={
-          {L50\#1},
-          {L50\#2},
-          {L50\#3},
-          {L70\#1},
-          {L70\#2}
+          {L50\#1, 0.05CC},
+          {L50\#2, 0.06CC},
+          {L50\#3, 0.05CC},
+          {L70\#1, 0.005CC},
+          {L70\#2, 0.00CC}
         },
-        yticklabel style={align=center, font=\small},
+        yticklabel style={font=\small},
         x tick label style={/pgf/number format/fixed},
       ]
       \addplot+[boxplot]
@@ -248,5 +273,6 @@ Talk about the RBN computational complexity
       table[y index=0] {results/figures/N100K2L70-2-computational-power.dat};
     \end{axis}
   \end{tikzpicture}
-  \caption{Computational complexity for evolved RBNs}
+  \caption{Computational capabilities for the evolved RBNs.}
+  \label{figure:evolved-ccs}
 \end{figure}

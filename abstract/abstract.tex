@@ -3,13 +3,14 @@
 Reservoir Computing, a relatively new approach to machine learning,
 utilizes untrained Recurrent Neural Nets as a reservoir of dynamics to preprocess some temporal task,
 making it separable with a linear readout layer
-Originating from the study of Liquid State machines and Excho State Networks,
+Originating from the study of Liquid State Machines and Echo State Networks,
 potentially any sparsely connected network containing feedforward and feedback loops can be a reservoir.
 Random Boolean Networks (RBN) is such a sparsely connected network that may be suitable for Reservoir Computing.
 
 In this paper we investigate the dynamics, performance, and viability of RBNs used for Reservoir Computing (RRC).
-
-A number of results from \cite{rbn-reservoir} are reproduced:
+A system to investigate these properties is implemented,
+and its correctness is validated by comparing its results with those of comparable studies.
+The chosen reproduced experiments result in the following findings:
 The more chaotic the phase of an RBN is, the higher its required input connectivity.
 The value of $K$ which provides optimal computational power is found to lie closer to $K=3$ when using homogenous networks,
 as opposed to the heterogenous optimal $\langle K \rangle = 2$.
