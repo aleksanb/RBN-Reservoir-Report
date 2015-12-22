@@ -115,7 +115,7 @@ This process is repeated for all the datasets,
 and the final regression parameters are chosen as a combination of the parameters obtained for each individual dataset.
 Finally we measure the normalized accuracy of the trained reservoir on the test dataset,
 defined as
-\todo[inline]{Use symbols instead of words?}
+
 \begin{equation}
 Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_output)}
 \label{formula:accuracy}
@@ -148,8 +148,6 @@ To further simplify GA implementation,
 we let all symbols in the genome take a value in the range $[0, max\_required\_in\_genome)$.
 The actual symbol values are then computed modulo the largest actual value they could take on
 (2 for input connectivity, n\_nodes for neighbors, $2^{2^{n\_nodes}}$ for transition rules).
-This redundancy in the genome can be an advantage,
-as it allows for new ways to explore the fitness landscape \cm.
 
 The final genome is shown in figure \ref{figure:rbn-genotype}.
 Note that this representation sets no limitations on input connectivity or uniqueness of neighbors.
