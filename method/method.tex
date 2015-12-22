@@ -1,7 +1,5 @@
 \section{Method}
 
-Why do we measure, what will we measure, and how will we measure it?
-
 We wish to verify the viability of RRC systems.
 This requres us to be able to reproduce at least some previously published results.
 Therefore, we will create a functioning RRC system, as in \cite{rbn-reservoir},
@@ -13,7 +11,7 @@ Secondly, we wish to test the effectiveness of creating new RBN rervoirs for exi
 If this is found to be the case, it would imply a many-to-one correspondence between RBN-reservoirs and readout layers.
 These sets of re-useable  reservoirs must necessarily have some similar characteristics,
 to allow our re-use of the readout layer to make sense.
-We will look at these reservoirs, attempting to find any similarities there might be.
+We will attempt to find any similarities there might be.
 In addition, such a finding can shed light on the optimal genome representation to use for evolving RBN reservoirs.
 
 The following systems have been implemented to investigate the stated questions.
@@ -129,8 +127,8 @@ Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_ou
 \label{formula:accuracy}
 \end{equation}
 .
-If the RRC system achieved a high accuracy on an interesting task,
-it can be stored ('pickled') to disk for further research.
+If the RRC system achieves a high accuracy on an interesting task,
+it will be stored for further research.
 
 \subsection{The evolving of functionally equivalent RBN reservoirs for existing readout layers}
 \label{section:method:evolving-rbns}
