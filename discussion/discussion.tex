@@ -1,0 +1,43 @@
+\section{Discussion}
+
+\subsection{Creating functioning RBN reservoir systems}
+
+\subsubsection{Temporal Parity with $N=3$}
+There is an abundance of well-performing reservoirs for $K=2$ and $K=3$.
+Reservoirs with higher connectivity have their fitnesses peak at higher values of input connectivity.
+This is in line with the expectations from \cite{rbn-reservoir} described in section \ref{section:optimal-perturbance}.
+The more chaotic the dynamics of the reservoir,
+the more it has to be perturbed to retain the input information.
+
+\subsubsection{Temporal Parity with $N=5$}
+The distribution of well-performing reservoirs is shifted heavily towards $K=3$.
+There are single outliers that perform well for $K=2$,
+but the accuracy means are considerably lower than for the reservoirs with $K=3$.
+
+Comparing the observed performance against the performace of the RRC systems benchmarked in \cite{rbn-reservoir} on the same task,
+one sees the same drop in performance from Temporal Parity with $N=3$ to $N=5$.
+
+\subsubsection{Computational Capability}
+Comparing the Computational Capability plots for both tasks (Figures \ref{figure:results:temporal-parity-3} and \ref{figure:results:temporal-parity-5}),
+one observes that the individuals with a higher Computational Capability have a tendency to be shifted towards higher accuracies.
+The lower accuracy bounds are increased as compared to the samples located at $.0CC$.
+This indicates a positive correlation between Computational Capability and performance,
+again in line with the expectations from \cite{rbn-reservoir}.
+One might be quick to assume that reservoirs achieving no higher than a $0.5$ accuracy perform no better than the tossing of a coin.
+There is however no guarantee that the distribution of correct classifications follow a binomial model with $p=0.5$.
+
+\subsubsection{Optimal Connectivity}
+When comparing general performance across $K$ values on the two tasks,
+the optimal connectivitity seems to be closer to $K=3$ than $K=2$.
+As described in section \ref{section:rbns},
+critical dynamics for heterogenous networks should be the most frequent at an average $\langle K \rangle = 2$.
+Such networks can therefore contain subgraphs of both higher and lower connectivity,
+while keeping the average connectivity the same.
+This disparity can therefore be explained by the fact that an homogenous RBN with $K=3$ can emulate an RBN with lower connectivity by having two or more in-edges from the same ancestor node,
+while an homogenous RBN with $K=2$ cannot emulate a higher-connectivity one.
+
+
+\subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
+
+Talk about Genome representation, inefficient, better with binary string?
+Luckily dominated by RBN-Reservoir simulation time

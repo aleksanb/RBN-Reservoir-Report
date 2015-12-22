@@ -9,13 +9,16 @@ Random Boolean Networks (RBN) is such a sparsely connected network that may be s
 
 In this paper we investigate the dynamics, performance, and viability of RBNs used for Reservoir Computing (RRC).
 
-Results from a previous paper indicating optimal reservoir input connectivity,
-internal RBN connectivity,
-and a relationship between Computational Capability and actual performance is reproduced.
+A number of results from \cite{rbn-reservoir} are reproduced:
+The more chaotic the phase of an RBN is, the higher its required input connectivity.
+The value of $K$ which provides optimal computational power is found to lie closer to $K=3$ when using homogenous networks,
+as opposed to the heterogenous optimal $\langle K \rangle = 2$.
+A relationship between Computational Capability and actual reservoir performance seems to exist.
 
-Finally, we find a one-to-many mapping between the readout layer in an already-trained RRC system and different RBN reservoirs.
-This makes the use of a smaller generative genome for evolving RRC systems interesting.
-Even though it hits fewer points in the RBN fitness landscape than a fixed genome,
+Finally, we find a one-to-many mapping between the readout layer in an already-trained RRC system and different RBN reservoirs,
+with there being a seemingly large set of interchangeable reservoirs for each readout layer.
+This makes the potential use of a smaller generative genome for evolving RRC systems interesting.
+Even though it hits fewer points in the RBN fitness landscape than the fixed genome used in this paper,
 a large amount of these points are still usable for each instance of a working readout layer.
 
 \end{abstract}
