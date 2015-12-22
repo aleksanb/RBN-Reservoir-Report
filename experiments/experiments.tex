@@ -1,6 +1,6 @@
 \section{Experiments}
 
-\subsection{Reproducing previous results}
+\subsection{Creating functioning RBN reservoir systems}
 
 In \cite{rbn-reservoir} the authors find a relationship between computational capability and performance,
 that certain values of $L$ give the best reservoir performance,
@@ -15,7 +15,10 @@ We will be using two versions of the \textit{temporal parity} task
 The temporal parity task is chosen over temporal density as it is the more difficult task
 (shown in \cite{rbn-reservoir}), presumably resulting in more interesting and rich resevoirs.
 
-\begin{table}[h]
+Computational Capability will be measured with $T=100$ for both versions of the task,
+but the required memory $t$ equal to the tasks window size $N$.
+
+\begin{table}
   \centering
   \caption{Task parameters}
   \label{table:task-parameters}
@@ -33,10 +36,10 @@ As the number of different RBNs is oppressively large,
 $(\frac{2^{2^{K}}N!}{(N-K)!})^N$ \cite{gershenson2004introduction},
 we therefore create 30 random specimens for each combination of the RBN parameters displayed in table \ref{table:rbn-combinations}.
 This results in 300 samples for each RBN N-K combination for each task.
-Note that the created RBNs have homogenous connectivity,
-as opposed to the heterogenous connectivity in \cite{rbn-reservoirs}.
+Note that the created RBNs are of homogenous connectivity,
+as opposed to the heterogenous connectivity used \cite{rbn-reservoir}.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{RBN combinations}
   \label{table:rbn-combinations}
@@ -49,6 +52,7 @@ as opposed to the heterogenous connectivity in \cite{rbn-reservoirs}.
 \end{table}
 
 \subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
+\label{section:experiments:evolving}
 
 We use the genetic algorithm presented in section \label{section:method:evolving-rbns} to evolve functionally equivalent RBNs (hyperparameters as in table \ref{table:ga-hyperparameters}).
 
@@ -60,7 +64,7 @@ All 5 RBNs have $N=100, K=2$, three of the RBNs having an input connectivity of 
 the remaining two $L=70$.
 This will allow us to measure if the functionally equivalent reservoirs for the readout layers trained on reservoirs with $L=50$ differ from the ones with $L=70$.
 
-\begin{table}[h]
+\begin{table}
   \centering
   \caption{GA Task parameters}
   \label{table:ga-task-parameters}

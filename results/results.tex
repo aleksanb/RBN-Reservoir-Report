@@ -1,78 +1,137 @@
 \section{Results}
 
+\subsection{Creating functioning RBN reservoir systems}
+
+Figures \ref{figure:results:temporal-parity-3} and \ref{figure:results:temporal-parity-5} contains plots of input connectivity against accuracy,
+as well as Computational Capability against accuracy for the sampled populations (for Temporal Parity with $N=3$ and $N=5$ respectively).
+
+Each plot contains a total of 300 samples, 30 for each input connectivity in the input connectivity boxplots.
+
+\subsubsection{Temporal Parity $N=3$}
+
+Almost no reservoirs with $K=1$ (fig. \ref{fig:res:d-100-3-1}) are able to solve the task adequately,
+almost all samples having a worse accuracy than 0.5.
+In the corresponding Computational Capability plot (fig. \ref{fig:res:c-100-3-1}),
+all samples have a low CC mapping to a correspondingly low accuracy.
+
+There are many reservoirs able to complete the task for $K=2$ (fig. \ref{fig:res:d-100-3-2}).
+The mean population fitness peaks at input connectivities 40–50,
+giving a firm suggestion to where the optimal connectivity is located.
+In the corresponding CC plot (fig. \ref{fig:res:c-100-3-2}),
+an increase in CC tends to correlate with an increase in mean accuracy.
+
+The mean fitness is even higher for the reservoirs with $K=3$ (fig. \ref{fig:res:d-100-3-2}),
+peaking at the input connectivities of 50–60.
+The corresponding CC-Accuracy plot in fig. \ref{fig:res:c-100-3-3}
+has its distribution skewed upwards towards the right.
+
 \begin{figure*}[!t]
   \centering
   \resizebox{\textwidth}{!}{
-    \subfloat{
+    \subfloat[K=1]{
       \input{results/figures/distribution-100-3-1.tex}
+      \label{fig:res:d-100-3-1}
     }
-    \subfloat{
+    \subfloat[K=2]{
       \input{results/figures/distribution-100-3-2.tex}
+      \label{fig:res:d-100-3-2}
     }
-    \subfloat{
+    \subfloat[K=3]{
       \input{results/figures/distribution-100-3-3.tex}
+      \label{fig:res:d-100-3-3}
     }
   }
 
   \resizebox{\textwidth}{!}{
-    \subfloat{
+    \subfloat[K=1]{
       \myscatterplot{results/figures/computational-power-100-3-1.dat}
+      \label{fig:res:c-100-3-1}
     }
-    \subfloat{
+    \subfloat[K=2]{
       \myscatterplot{results/figures/computational-power-100-3-2.dat}
+      \label{fig:res:c-100-3-2}
     }
-    \subfloat{
+    \subfloat[K=3]{
       \myscatterplot{results/figures/computational-power-100-3-3.dat}
+      \label{fig:res:c-100-3-3}
     }
   }
-  \caption{Figures a-c show the average performance with K=[1,2,3] for temporal 100 3. We see that 1 sucks a bit compared to 2 and 3, although 2 and 3 both work.}
+  \caption{
+    Plots for Temporal Parity with $N=3$.
+    Figures \ref{fig:res:d-100-3-1}–\ref{fig:res:d-100-3-3} plot the accuracies of the sampled RBNs against their input connectivity,
+    for K=1–3 respectively.
+    Figures \ref{fig:res:c-100-3-1}–\ref{fig:res:c-100-3-3} plot the accuracy of the previous figures against their Computational Capability ($T=100, t=3$).
+  }
+  \label{figure:results:temporal-parity-3}
 \end{figure*}
+
+\subsubsection{Temporal Parity $N=5$}
+
+Temporal Parity with $N=5$ is a considerably more difficult task for RBNs of size 100,
+as shown in figure \ref{figure:results:temporal-parity-5}.
+Again reservoirs with $K=1$ (fig. \ref{fig:res:d-100-5-1}) are unable to complete the task,
+the abysmal CC-Accuracy plot of fig. \ref{fig:res:c-100-5-1} telling the same story.
+Reservoirs with $K=2$ tell the same story (fig. \ref{fig:res:d-100-5-2}).
+There is but a single well-performing outlier at the input connectivity of 50.
+
+The mean fitness is considerably higher for $K=3$ (fig. \ref{fig:res:d-100-5-3}),
+still having its best reservoirs at the input connectivity of 50-60.
+The CC plot (fig. \ref{fig:res:c-100-5-3}) contains considerable more samples with higher CC.
 
 \begin{figure*}[!t]
   \centering
   \resizebox{\textwidth}{!}{
-    \subfloat{
+    \subfloat[K=1]{
       \input{results/figures/distribution-100-5-1.tex}
+      \label{fig:res:d-100-5-1}
     }
-    \subfloat{
+    \subfloat[K=2]{
       \input{results/figures/distribution-100-5-2.tex}
+      \label{fig:res:d-100-5-2}
     }
-    \subfloat{
+    \subfloat[K=3]{
       \input{results/figures/distribution-100-5-3.tex}
+      \label{fig:res:d-100-5-3}
     }
   }
 
   \resizebox{\textwidth}{!}{
-    \subfloat{
+    \subfloat[K=1]{
       \myscatterplot{results/figures/computational-power-100-5-1.dat}
+      \label{fig:res:c-100-5-1}
     }
-    \subfloat{
+    \subfloat[K=2]{
       \myscatterplot{results/figures/computational-power-100-5-2.dat}
+      \label{fig:res:c-100-5-2}
     }
-    \subfloat{
+    \subfloat[K=3]{
       \myscatterplot{results/figures/computational-power-100-5-3.dat}
+      \label{fig:res:c-100-5-3}
     }
   }
-  \caption{Figures a-c show the average performance with K=[1,2,3] for temporal 100 3. We see that 1 sucks a bit compared to 2 and 3, although 2 and 3 both work.}
+  \caption{
+    Plots for Temporal Parity with $N=5$.
+    Figures \ref{fig:res:d-100-5-1}–\ref{fig:res:d-100-5-3} plot the accuracies of the sampled RBNs against their input connectivity,
+    for K=1–3 respectively.
+    Figures \ref{fig:res:c-100-5-1}–\ref{fig:res:c-100-5-3} plot the accuracy of the previous figures against their Computational Capability ($T=100, t=5$).
+  }
+  \label{figure:results:temporal-parity-5}
 \end{figure*}
-%  \caption{Here we plot the fitness against connectivity for K=[1,2,3] with temporal 100 5. We can see this is much more difficile tha le before. This difference is kinda weird as K=2 should perform better, but that considers a heterogenous reservoir, while we use the homogenous one. There might also be unaccounted differences in reservoir size that affect this LOL w8 this is consistent after all just read their plots correctly.}
-%\end{figure*}
 
-\subsection{Using RBN-reservoirs in solving time-series tasks}
+\subsection{Evolving functionally equivalent RBN reservoirs for existing readout layers}
 
-Turns out it works great, as in that 2013 paper.
-There seems to be extremely many usable reservoirs, at least for K=2.
+Talk about how there were many functionally equivalent RBN reservoirs,
+talk about average max fitness of the final generations for each thingy.
 
-\begin{itemize}
-  \item Solving the Temporal-Parity task
-  \item Solving the Temporal-Density task
-\end{itemize}
+%Having evolved 30 new reservoirs for each of the 5 readout layers presented in
+%section \ref{section:experiments:evolving},
 
-\subsection{Evolving new RBN-Reservoirs to use existing readout layers}
+The input connectivity of the evolved reservoirs is shown in figure \ref{figure:evolved_connectivity}.
+The input connectivity seems to be largely independent of the original reservoir input connectivity,
+the population mean slightly above 50 for all groups of evolved reservoirs.
 
-Three different Readout layers were created and stored for evolving new readout layers.
-For each readout layer, we run the evolutionary algorithm 30 times.
-
+Talk about the RBN computational complexity
+\todo[inline]{I should show the original RN complexity on the graph as well, so we know what to compare against}
 
 \begin{figure}
   \centering
@@ -147,8 +206,11 @@ For each readout layer, we run the evolutionary algorithm 30 times.
       table[y index=0] {results/figures/N100K2L70-2-connectivity.dat};
     \end{axis}
   \end{tikzpicture}
-  \caption{Connectivity for evolved RBNS.
-           Observe that the connectivity distribution of the evolved RBNs is heavily skewed towards 50, regardless of the input connectivity of the original RBN.}
+  \caption{
+    Connectivity for evolved RBNS.
+    Observe that the connectivity distribution of the evolved RBNs is heavily skewed towards 50, regardless of the input connectivity of the original RBN.
+  }
+  \label{figure:evolved-connectivity}
 \end{figure}
 
 \begin{figure}
@@ -187,30 +249,3 @@ For each readout layer, we run the evolutionary algorithm 30 times.
   \end{tikzpicture}
   \caption{Computational complexity for evolved RBNs}
 \end{figure}
-
-\begin{itemize}
-  \item Show Fitness Graphs with increasing fitness for evolved RBNs
-  \item Complexity analysis of RBNs utilizing the same readout layer
-\end{itemize}
-
-We see that there are many acceptable RBN-Reservoirs for each readout-layer.
-Maybe these RBN-Reservoirs have similar dynamics?
-
-
-\subsection{Analysis of Dynamics of developed RBN-Reservoirs}
-
-For each group of evolved RBN-Reservoirs (5 or so in each):
-
-\begin{itemize}
-  \item Show Computational complexity measure as developed in that 2013 paper
-  \item Show transient time for the group
-  \item Show Attractor lengths for the group
-\end{itemize}
-
-
-Perhaps the required dynamics are different for the different tasks?
-Remember=3 gives different attractors than remember=4. That'd be cool.
-
-
-Here there'll be an image visualizing one of the groups of evolved RBN-Reservoirs.
-Perhaps we can visually identify similarities.

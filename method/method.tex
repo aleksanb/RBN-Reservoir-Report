@@ -37,15 +37,9 @@ The codebase is available on GitHub \cite{forprosjekt-code-github} under a soon-
 \subsection{Measuring computational capability}
 
 We will be using the computational complexity measure introduced in \ref{section:computational-capability} to analyze the created RBNs.
-
-% \item
-%   How do i estimate transient times and attractor lengths?
-%   Random samling! Link to some algorithm i use here
-% \item
-%   Fun Anecdote: Link to that paper measuring power usage in RBN-Reservoirs:
-%   \cite{rbn-reservoir-energy-efficiency}
-
-% Attractor lengths and such: This might be useful \cite{berdahl2009random}
+This measure is parameterized over both input stream length $T$ and the required depth of separation $t$.
+To make this an useful measure when comparing against reservoir accuracy on a specific task,
+we will chose values of $T$ similar to the length and $t$ equal to the required memory of that task.
 
 \subsection{The creation and training of a functioning RRC system}
 

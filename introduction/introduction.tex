@@ -9,12 +9,15 @@ an approach found fruitful in \cite{rbn-reservoir}.
 
 First we create a working RBN-reservoir computing system (RRC) in the Python programming language,
 reproducing chosen experiments from \cite{rbn-reservoir}.
+These include finding the optimal input connectivity ($L$) and internal connectivity $K$,
+as well as testing their measure of Computational Capability against actual reservoir performance.
 
 Next we investigate whether the readout layer of a working RRC system can be re-used with other RBN-reservoirs than the one it was originally trained on,
 and still stay accurate on the original classification task.
 These functionally equivalent reservoirs, if any, will be evolved through the use of a genetic algorithm (GA).
 
-Finally we look at the dynamics and characteristics of these groups of RBN-Reservoirs, attempting to find any similarities that might be exploitable.
+Finally we look at the dynamics and characteristics of these groups of RBN-Reservoirs,
+attempting to find any similarities that made them exploitable for computation.
 
 \todo[inline]{Mention something about the many-to-one mapping of readout->reservoir leading to the possibility of using a generative genome here, or take that later?}
 
