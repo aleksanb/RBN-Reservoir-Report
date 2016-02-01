@@ -4,14 +4,12 @@
 
 Recurrent Neural Networks, as opposed to feed-forward neural networks,
 are notoriously time consuming and difficult to train.
-\todo[inline]{What is RNN and FFNs?}
 This is due to feedback from the recurrent connections during the training process,
 allowing small topology changes to drastically change a network's position in the fitness landscape.
 
 It was therefore proposed both in \cite{jaeger2002adaptive} (as Echo State Networks, or ESN)
 and \cite{natschlager2002liquid} (as Liquid State Machines, or LSM) to separate the RNN into two parts,
 the untrained reccurrent reservoir, and the trained readout layer.
-\todo[inline]{Add image of this thingy here somewhere}
 Both of these methods have been unified into the field of Reservoir Computing,
 now focusing on the separate training and evolution of the recurrent and readout parts \cite{lukovsevivcius2012reservoir}.
 

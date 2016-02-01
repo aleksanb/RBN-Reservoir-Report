@@ -4,7 +4,7 @@ To verify the viability of RBNs in RC systems, a functioning RRC system has to b
 Being able to reproduce results from \cite{rbn-reservoir} will lend credibility to the approach presented in this paper.
 The Computational Capability measure presented therein will be used to analyze our RRC systems.
 
-Second, we wish to investigate the potential many-to-many relationship betwen readout layers and reservoirs,
+Second, we wish to investigate the potential many-to-one relationship betwen reservoirs and previously trained readout layers,
 evolving these functionally equivalent reservoirs through artificial evolution.
 These sets of interchangeable reservoirs may share similar attributes and Computational Capability,
 and will be analyzed.
@@ -115,7 +115,6 @@ This process is repeated for all the datasets,
 and the final regression parameters are chosen as a combination of the parameters obtained for each individual dataset.
 Finally we measure the normalized accuracy of the trained reservoir on the test dataset,
 defined as
-
 \begin{equation}
 Accuracy = 1 - \dfrac{sum(actual\_output \neq expected\_output)}{len(correct\_output)}
 \label{formula:accuracy}
@@ -127,7 +126,7 @@ it will be stored for further research.
 \subsection{The evolving of functionally equivalent RBN reservoirs for existing readout layers}
 \label{section:method:evolving-rbns}
 
-To investigate the potential many-to-many mapping between RBN-reservoirs and readout layers,
+To investigate the potential many-to-one mapping between RBN-reservoirs and readout layers,
 a Genetic Algorithm (section \ref{section:background:ga}) will be used.
 A fixed test dataset and readout layer for fitness evaluation will be used.
 
